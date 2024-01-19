@@ -9,6 +9,7 @@ const announcementRoute = require("./Routes/announcement");
 const commentRoute = require("./Routes/comment");
 const jobsAndInternshipsRoute = require("./Routes/jobsAndInternships");
 const lostAndFoundRoute = require("./Routes/lostAndFound");
+const messageRoute = require("./Routes/message");
 
 app.use(cors());
 dotenv.config();
@@ -29,6 +30,7 @@ app.use("/api/announcement", announcementRoute);
 app.use("/api/comment", commentRoute);
 app.use("/api/jobsAndInternships", jobsAndInternshipsRoute);
 app.use("/api/lostAndFound", lostAndFoundRoute);
+app.use("/api/message", messageRoute);
 
 app.listen(5011, () => {
   console.log("Server is running on port 5011.");

@@ -60,10 +60,8 @@ const userSchema = new mongoose.Schema(
     ],
     pendingClubRequests: [
       {
-        clubId: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Club",
-        },
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Club",
       },
     ],
   },
