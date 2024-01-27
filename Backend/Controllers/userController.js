@@ -9,11 +9,11 @@ const Announcement = require("../Models/announcement");
 const loginUser = async (req, res) => {
   if (!req.body.username || !req.body.password)
     return res
-      .status(403)
+      .status(400)
       .json({ message: "please consider filling all datas" });
   const userExist = await User.findOne({ username: req.body.username });
   if (!userExist)
-    return res.status(40).json({ message: "username or password incorrect" });
+    return res.status(400).json({ message: "username or password incorrect" });
 
   const validPassword = await bcrypt.compare(
     req.body.password,
