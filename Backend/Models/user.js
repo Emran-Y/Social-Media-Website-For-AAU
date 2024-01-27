@@ -73,11 +73,12 @@ const User = mongoose.model("User", userSchema);
 function userValidator(user) {
   const schema = Joi.object({
     universityId: Joi.string().required(),
-    universityPassword: Joi.string().required(), // Validate universityPassword instead of password
+    universityPassword: Joi.string().required(),
     fullName: Joi.string().min(5).max(50).required(),
     fieldOfStudy: Joi.string().required(),
     username: Joi.string().min(5).max(255).required(),
     password: Joi.string().min(8).max(1024).required(),
+    profilePicture: Joi.string().allow("", null), // Make profilePicture optional
   });
 
   return schema.validate(user);

@@ -2,119 +2,127 @@
 000000
 ffffff
 */
-*{
+* {
     margin: 0;
     padding: 0;
     font-family: 'Karla', sans-serif;
     box-sizing: border-box;
 }
 
-.login-header{
-    display: flex; 
+.signup-header {
+    display: flex;
     justify-content: space-between;
     margin-top: 20px;
-    margin-inline:10px ;
+    margin-inline: 10px;
     margin-bottom: 30px;
 }
-.login-header-title{
+
+.signup-header-title {
     font-size: 20px;
     color: #3A7BBA;
     text-shadow: 0px 0px 0px 1px black;
     word-spacing: 0.03px;
 }
 
-.login-header-line{
+.signup-header-line {
     margin-top: -10px;
-    margin-bottom: 110px;
+    margin-bottom: 60px;
 }
 
-.login-signup{
+.signup-login {
     font-size: 12px;
-    text-decoration:dotted;
+    text-decoration: dotted;
 }
-.login-signup-link:hover{
+
+.signup-login-link:hover {
     text-decoration: underline;
 }
 
-.login-signup-link{
+.signup-login-link {
     color: #3A7BBA;
     text-shadow: 0px 0px 0px 1px black;
     cursor: pointer;
 }
 
-.login-main{
+.signup-main {
     display: flex;
     justify-content: center;
-    margin-top: 60px;
+    margin-top:40px;
+    width: 90vw;
+    margin: 0 auto;
 }
 
-.login-form-header{
+.signup-form-header {
     margin-bottom: 20px;
+    min-width: 100%;
 }
 
-.login-form-header-title{
+.signup-form-header-title {
     font-size: 35px;
 }
 
-.login-form-header-cap{
+.signup-form-header-cap {
     font-size: 15px;
     color: rgb(157, 153, 153);
 }
 
 
-.login-username-container{
+.signup-username-container {
     display: flex;
     align-items: center;
     border: 1.5px solid black;
     margin-bottom: 10px;
-    padding: 0.25rem 0.5rem;
-    width: 100%;
+    min-width: 100%;
+    padding: 0.4rem 0.8rem;
 }
 
-.login-username{
+.signup-username {
     border: none;
     outline: none;
-    
+
 }
-.login-username-icon{
+
+.signup-username-icon {
     margin-right: 5px;
 }
 
-.login-password-container{
+.signup-password-container {
     display: flex;
     align-items: center;
     border: 1.5px solid black;
-    padding: 0.25rem 0.5rem;
-    width: 100%;
+    padding: 0.4rem 0.8rem;
+    min-width: 100%;
 }
 
-.login-password{
+.signup-password {
     border: none;
     outline: none;
     width: 100%;
 }
-.login-password-icon {
+
+.signup-password-icon {
     margin-right: 5px;
 }
 
-.login-error-message{
+.signup-error-message {
     color: red;
     font-size: 16px;
-    margin-top: 15px;
+    margin-top: 4px;
     font-weight: 500;
+    margin-bottom: 4px;
 }
 
 
 
 
-.login-image{
+.signup-image {
     display: none;
 }
 
 
-.login-btn{
+.signup-btn {
     height: 35px;
-    margin-top: 20px;
+    margin-top: 5px;
     background-color: #3A7BBA;
     border: none;
     color: white;
@@ -122,74 +130,88 @@ ffffff
     border-radius: 20px;
     cursor: pointer;
 }
-.login-btn:hover{
+
+.signup-btn:hover {
     background-color: #2E5C9B;
 }
 
-.login-form-container form {
+.signup-form-container form {
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-width: 100%;
 }
 
-
-@media(min-width:600px){
-    .login-image{
+@media(min-width:600px) {
+    .signup-image {
         display: inline-block;
         width: 300px;
         height: 400px;
     }
-    .login-main{
+
+    .signup-main {
         display: flex;
         justify-content: space-evenly;
         align-items: center;
+        margin-bottom: 20px;
     }
-    .login-header-line{
+
+    .signup-header-line {
         margin-bottom: 50px;
         display: none;
     }
-    .login-header-title{
+
+    .signup-header-title {
         font-size: 40px;
         word-spacing: 0.0000000005px;
     }
-    .login-form-container{
+
+    .signup-form-container {
         width: 400px;
     }
-    .login-form-header{
+
+    .signup-form-header {
         margin-bottom: 30px;
     }
-    .login-form-header-title{
+
+    .signup-form-header-title {
         font-size: 50px;
     }
-    .login-form-header-cap{
+
+    .signup-form-header-cap {
         font-size: 20px;
     }
-    .login-username-container, .login-password-container{
+
+    .signup-username-container,
+    .signup-password-container {
         padding: 0.5rem 1rem;
     }
 
-    .login-username, .login-password{
-        font-size:20px ;
+    .signup-username,
+    .signup-password {
+        font-size: 20px;
     }
-    .login-btn{
+
+    .signup-btn {
         height: 50px;
         width: 150px;
         font-size: 20px;
         border-radius: 40px;
     }
-    .login-signup{
+
+    .signup-login {
         font-size: 20px;
     }
-    .login-header{
+
+    .signup-header {
         padding-inline: 30px;
     }
 }
 
-@media screen and (max-width: 410px){
+@media screen and (max-width: 410px) {
 
-    .login-header-title{
-    font-size: 14px;}
-}    
-
-
+    .signup-header-title {
+        font-size: 14px;
+    }
+}
 
