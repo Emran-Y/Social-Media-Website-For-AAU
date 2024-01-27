@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./signup.css";
 
 import { IoPerson } from "react-icons/io5";
@@ -10,12 +10,11 @@ import { FaUniversity } from "react-icons/fa";
 import { MdPassword } from "react-icons/md";
 import { GiEgyptianProfile } from "react-icons/gi";
 
-function signup() {
-  const history = useHistory();
+function Signup() {
+  const navigate = useNavigate();
   if (localStorage.getItem("userData")) {
-    history.push("/");
+    navigate("/announcement");
   }
-
   const [erroMessage, setErrorMessage] = React.useState("");
   const [showError, setShowError] = React.useState(false);
   const [fullName, setFullName] = React.useState("");
@@ -78,9 +77,10 @@ function signup() {
               profilePicture: data.profilePicture,
               fieldOfStudy: data.fieldOfStudy,
               fullName: data.fullName,
+              clubAdmin: data.clubAdmin,
             })
           );
-          history.push("/");
+          navigate("/announcement");
           setFullName("");
           setFieldOfStudy("");
           setUniversityId("");
@@ -217,4 +217,4 @@ function signup() {
 //     username: req.body.username,
 //     password: hashedPassword,
 
-export default signup;
+export default Signup;

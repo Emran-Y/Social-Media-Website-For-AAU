@@ -36,6 +36,7 @@ const loginUser = async (req, res) => {
       _.pick(userExist, [
         "_id",
         "token",
+        "isAdmin",
         "fullName",
         "username",
         "clubAdmin",
@@ -45,6 +46,7 @@ const loginUser = async (req, res) => {
         "profilePicture",
         "clubMemberships",
         "pendingClubRequests",
+        "clubAdmin",
       ])
     );
 };
@@ -122,6 +124,7 @@ const registerUser = async (req, res) => {
         _.pick(userSaved, [
           "_id",
           "token",
+          "isAdmin",
           "fullName",
           "username",
           "clubAdmin",
@@ -131,6 +134,7 @@ const registerUser = async (req, res) => {
           "profilePicture",
           "clubMemberships",
           "pendingClubRequests",
+          "clubAdmin",
         ])
       );
   } catch (err) {

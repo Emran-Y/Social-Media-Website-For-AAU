@@ -2,16 +2,16 @@ import React from "react";
 import "./login.css";
 import { IoPerson } from "react-icons/io5";
 import { PiLockKeyFill } from "react-icons/pi";
-import { useHistory, Link } from "react-router-dom";
-function login() {
-  const history = useHistory();
+import { useNavigate, Link } from "react-router-dom";
+function Login() {
+  const navigate = useNavigate();
+  if (localStorage.getItem("userData")) {
+    navigate("/announcement");
+  }
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [erroMessage, setErrorMessage] = React.useState("");
   const [showError, setShowError] = React.useState(false);
-  if (localStorage.getItem("userData")) {
-    history.push("/");
-  }
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -52,10 +52,12 @@ function login() {
               profilePicture: data.profilePicture,
               fieldOfStudy: data.fieldOfStudy,
               fullName: data.fullName,
+              isAdmin: data.isAdmin,
+              clubAdmin: data.clubAdmin,
             })
           );
 
-          history.push("/");
+          navigate("/announcement");
         } else {
           setShowError(true);
           setErrorMessage(data.message);
@@ -116,4 +118,4 @@ function login() {
   );
 }
 
-export default login;
+export default Login;

@@ -1,12 +1,12 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-function home() {
-  const history = useHistory();
+function Home() {
+  const navigate = useNavigate();
   if (!localStorage.getItem("userData")) {
-    history.push("/login");
+    navigate("/login");
   }
   return <div>home</div>;
 }
 
-export default home;
+export default Home;
