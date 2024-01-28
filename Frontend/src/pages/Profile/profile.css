@@ -1,0 +1,121 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.profile-container{
+    padding-inline: 10px;
+}
+
+.profile-1{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+}
+
+.profile-logout-container{
+    display: flex;
+    justify-content: flex-end;
+    width: 100vw;
+    margin-right: 40px;
+}
+
+.profile-logout-btn{
+    border: none;
+    background-color: red;
+    color: white;
+    padding:0.25rem 0.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.profile-img{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-size:cover ;
+}
+
+.profile-userinfo-container{
+    text-align: center;
+}
+
+.profile-userinfo-name{
+    font-size: 30px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+.profile-userinfo-fieldofstudy{
+    font-size: 20px;
+    font-weight: 400;
+    margin-top: -4px;
+}
+
+.profile-2{
+    margin-top: 20px;
+    padding-left: 20px;
+}
+
+.profile-2-1-title{
+    font-size: 28px;
+}
+
+.profile-2-1-buttons{
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-start;
+}
+.profile-2-1-buttons button{
+    margin-right: 10px;
+    border: none;
+    padding: 0.25rem 0.5rem;
+    border-radius: 5px;
+    font-weight: 500;
+    font-size: 16px;
+    cursor: pointer;
+}
+.profile-2-1-buttons button:hover{
+    background-color: #ccc;
+    color: #000;
+}
+
+/* .profile-2-1-comment{
+    background-color: #3A7BBA;
+    color: #fff;
+} */
+
+.profile-2-2{
+    margin-top: 20px;
+
+}
+
+.profile-2-2-feed{
+    display: flex;
+    flex-direction: column;
+  
+}
+
+.profile-2-2-feed-card{
+    margin-top: 10px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.profile-2-2-commenter{
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.profile-2-2-comment{
+    font-size: 16px;
+    margin-top: 10px;
+    color:#a6a0a0;
+}
