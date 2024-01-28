@@ -12,9 +12,12 @@ import { GiEgyptianProfile } from "react-icons/gi";
 
 function Signup() {
   const navigate = useNavigate();
-  if (localStorage.getItem("userData")) {
-    navigate("/announcement");
-  }
+  React.useEffect(() => {
+    if (localStorage.getItem("userData")) {
+      navigate("/announcement");
+    }
+  }, []);
+
   const [erroMessage, setErrorMessage] = React.useState("");
   const [showError, setShowError] = React.useState(false);
   const [fullName, setFullName] = React.useState("");

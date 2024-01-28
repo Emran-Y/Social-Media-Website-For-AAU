@@ -5,9 +5,11 @@ import { PiLockKeyFill } from "react-icons/pi";
 import { useNavigate, Link } from "react-router-dom";
 function Login() {
   const navigate = useNavigate();
-  if (localStorage.getItem("userData")) {
-    navigate("/announcement");
-  }
+  React.useEffect(() => {
+    if (localStorage.getItem("userData")) {
+      navigate("/announcement");
+    }
+  }, []);
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [erroMessage, setErrorMessage] = React.useState("");
