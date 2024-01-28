@@ -22,6 +22,8 @@
     justify-content: flex-end;
     width: 100vw;
     margin-right: 40px;
+    margin-top: 20px;
+    padding-right: 30px;
 }
 
 .profile-logout-btn{
@@ -39,6 +41,7 @@
     border-radius: 50%;
     overflow: hidden;
     background-size:cover ;
+    border: 1px solid #ccc;
 }
 
 .profile-userinfo-container{
@@ -118,4 +121,29 @@
     font-size: 16px;
     margin-top: 10px;
     color:#a6a0a0;
+}
+
+
+@media screen and (min-width: 900px){
+    .profile-logout-btn{
+        font-size: 30px;
+    }
+    .profile-1{
+        flex-direction: row;
+        margin-left: 20px;
+    }
+    .profile-userinfo-container{
+        align-self: flex-start;
+        margin-left: 20px;
+    }
+    .profile-userinfo-name{
+        font-size: 40px;
+    }
+    .profile-userinfo-fieldofstudy{
+        font-size: 30px;
+    }
+    .profile-logout-container{
+        padding-right: 80px;
+    }
+    
 }

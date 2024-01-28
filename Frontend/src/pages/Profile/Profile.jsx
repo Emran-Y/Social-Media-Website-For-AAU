@@ -85,12 +85,12 @@ function Profile() {
 
   return (
     <div className="profile-container">
+      <div className="profile-logout-container">
+        <button onClick={handleLogOut} className="profile-logout-btn">
+          Log Out
+        </button>
+      </div>
       <div className="profile-1">
-        <div className="profile-logout-container">
-          <button onClick={handleLogOut} className="profile-logout-btn">
-            Log Out
-          </button>
-        </div>
         <div className="profile-img-container">
           <img
             src={userData && userData.profilePicture}
