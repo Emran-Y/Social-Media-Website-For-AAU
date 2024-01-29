@@ -178,7 +178,7 @@ function Signup() {
               <input
                 value={profilePicture}
                 onChange={(e) => setProfilePicture(e.target.value)}
-                placeholder="Profile Picture URL"
+                placeholder="Profile Picture URL (Optional)"
                 className="signup-username"
               />
             </div>

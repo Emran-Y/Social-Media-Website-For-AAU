@@ -1,0 +1,191 @@
+/* Announcement.css */
+
+.announcement-page {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.announcement-posts {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    gap: 10px;
+    justify-content: space-evenly;
+    margin-top: 20px;
+}
+
+.announcement-card {
+    display: flex;
+    flex-direction: column;
+    box-shadow: -1px 3px 15px 3px rgba(0, 0, 0, 0.21);
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 45vw;
+    flex-basis: calc(50% - 20px);
+    background-color: #F3DEDE;
+    /* Background color set to orange */
+    padding-bottom:20px;
+    position: relative;
+    padding-bottom: 30px;
+    max-width: 45vw;
+}
+
+.announcemnt-1-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media (max-width: 600px) {
+    .announcement-card {
+        /* Single column layout for mobile */
+        flex-basis: calc(100% - 20px);
+        max-width: 100vw;
+    }
+    .announcemnt-1-1-container{
+        flex-direction: column;
+    }
+}
+
+
+
+.announcemnt-1-1-container{
+    display: flex;
+    align-items: center;
+}
+.announcement-card-img {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    margin-bottom: 5px;
+}
+
+.announcement-card-info {
+    flex: 1;
+    align-self: flex-start;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.announcement-card-title {
+    text-align: center;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.announcement-card-desc {
+    font-size: 20px;
+    text-align: center;
+    font-size: 16px;
+    text-align: center;
+}
+
+.announcement-card-timeago {
+    color: #555;
+}
+
+.announcement-card-actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* .announcement-like-button,
+.announcement-comment-button  */
+
+/* Admin Form Styles */
+
+.announcement-admin-form {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.announcement-form-label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.announcement-form-input,
+.announcement-form-textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.announcement-form-button {
+    background-color: #3a7bba;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.announcement-form-button:hover {
+    background-color: #305c8c;
+}
+
+/* NiceSpinner.css (Loader Styles) */
+
+.nice-spinner {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #3498db, #3a7bba);
+    animation: pulse 1.5s ease-in-out infinite;
+    margin: 0 auto;
+    /* Center the spinner */
+}
+
+.announcement-card-actions{
+    margin-top: 20px;
+    padding-inline: 15px;
+}
+
+.announcement-like-button,.announcement-comment-button{
+    font-size: 30px;
+    cursor: pointer;
+    position: absolute;
+
+}
+.announcement-like-button{
+    bottom: 15px;
+    left: 20px;
+}
+.announcement-comment-button{
+    right:20px;
+    bottom: 15px;
+}
+
+
+
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.8);
+        box-shadow: 0 0 0 0 rgba(58, 123, 186, 0.7);
+    }
+
+    50% {
+        transform: scale(1);
+        box-shadow: 0 0 20px 10px rgba(58, 123, 186, 0);
+    }
+
+    100% {
+        transform: scale(0.8);
+        box-shadow: 0 0 0 0 rgba(58, 123, 186, 0.7);
+    }
+}
+

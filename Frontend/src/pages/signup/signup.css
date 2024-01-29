@@ -190,6 +190,7 @@ ffffff
     .signup-username,
     .signup-password {
         font-size: 20px;
+        width: 100%;
     }
 
     .signup-btn {

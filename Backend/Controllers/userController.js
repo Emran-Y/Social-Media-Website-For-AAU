@@ -181,23 +181,31 @@ const likeAnnouncement = async (req, res) => {
   try {
     const user = await User.findById(req.user._id);
     const announcement = await Announcement.findById(req.params.announcementId);
-    if (user.activities.likes.includes(req.params.announcementId)) {
+
+    const hasLiked = user.activities.likes.includes(req.params.announcementId);
+
+    if (hasLiked) {
+      // Unlike the announcement
       user.activities.likes = user.activities.likes.filter(
-        (like) => like != req.params.announcementId
+        (like) => like.toString() !== req.params.announcementId
       );
       announcement.likes = announcement.likes.filter(
-        (like) => like != req.user._id
+        (like) => like.toString() !== req.user._id
       );
-      res.status(200).json(announcement);
     } else {
+      // Like the announcement
       user.activities.likes.push(req.params.announcementId);
       announcement.likes.push(req.user._id);
-      user.save();
-      announcement.save();
-      res.status(200).json(announcement);
     }
+
+    // Save changes to the database
+    await user.save();
+    await announcement.save();
+
+    // Respond with the updated announcement
+    res.status(200).json(announcement);
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(500).json({ message: "Internal server error" });
   }
 };

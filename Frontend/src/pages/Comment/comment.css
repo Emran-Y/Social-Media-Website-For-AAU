@@ -1,0 +1,44 @@
+/* CommentSection.css */
+
+.comment-section {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.comment-input {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+textarea {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none;
+    margin-right: 10px;
+}
+
+button {
+    padding: 8px 12px;
+    background-color: #3a7bba;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #305c8c;
+}
+
+.comments-list {
+    max-height: 300px;
+    /* Set a maximum height for the comment list */
+    overflow-y: auto;
+    /* Enable vertical scrolling if needed */
+}
+
+.comment-item {
+    margin-bottom: 10px;
+}
