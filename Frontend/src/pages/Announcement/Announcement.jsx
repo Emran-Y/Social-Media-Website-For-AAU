@@ -5,12 +5,15 @@ import { format } from "timeago.js";
 import "./announcement.css";
 import { FaRegThumbsUp } from "react-icons/fa";
 import { FaRegCommentDots } from "react-icons/fa";
+import CommentSection from "../Comment/Comment";
 
 function Announcement() {
   const [announcements, setAnnouncements] = useState([]);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoaded, setIsLoaded] = useState(true);
   const [likes, setLikes] = useState([]);
+  const [currentCommentingAnnouncemnt, setCurrentCommentingAnnouncemnt] =
+    useState("");
 
   React.useEffect(() => {
     fetch("http://localhost:5011/api/user/likes", {
@@ -128,7 +131,9 @@ function Announcement() {
 
   // Handle comment
   const handleComment = (announcementId) => {
-    console.log("Comment button clicked for announcement:", announcementId);
+    currentCommentingAnnouncemnt == ""
+      ? setCurrentCommentingAnnouncemnt(announcementId)
+      : setCurrentCommentingAnnouncemnt("");
   };
 
   // JSX for the announcement card
@@ -207,19 +212,30 @@ function Announcement() {
               </div>
               <div className="announcement-card-actions">
                 <FaRegThumbsUp
-                  style={
-                    likes.includes(announcement._id)
-                      ? { color: "blue" }
-                      : { color: "black" }
-                  }
+                  style={{
+                    color: likes.includes(announcement._id) ? "blue" : "black",
+                    ...((currentCommentingAnnouncemnt === "" ||
+                      currentCommentingAnnouncemnt !== announcement._id) && {
+                      position: "absolute",
+                    }),
+                  }}
                   onClick={() => handleLike(announcement._id)}
                   className="announcement-like-button"
                 />
                 <FaRegCommentDots
+                  style={
+                    currentCommentingAnnouncemnt == "" ||
+                    currentCommentingAnnouncemnt != announcement._id
+                      ? { position: "absolute" }
+                      : { position: "static" }
+                  }
                   onClick={() => handleComment(announcement._id)}
                   className="announcement-comment-button"
                 />
               </div>
+              {currentCommentingAnnouncemnt == announcement._id && (
+                <CommentSection announcementId={announcement._id} />
+              )}
             </div>
           ))
         )}

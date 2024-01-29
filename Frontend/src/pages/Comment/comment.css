@@ -1,44 +1,89 @@
-/* CommentSection.css */
+/* comment.css */
 
 .comment-section {
-    width: 100%;
     margin-top: 20px;
 }
 
 .comment-input {
     display: flex;
+    justify-content: space-between;
     margin-bottom: 10px;
 }
 
-textarea {
-    flex: 1;
-    padding: 8px;
+.comment-input textarea {
+    width: 80%;
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    resize: none;
-    margin-right: 10px;
 }
 
-button {
-    padding: 8px 12px;
-    background-color: #3a7bba;
+.comment-input button {
+    width: 18%;
+    padding: 10px;
+    background-color: #3498db;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
 }
 
-button:hover {
-    background-color: #305c8c;
+.comment-input button:hover {
+    background-color: #45a049;
 }
 
 .comments-list {
-    max-height: 300px;
-    /* Set a maximum height for the comment list */
+    max-height: 200px;
     overflow-y: auto;
-    /* Enable vertical scrolling if needed */
 }
 
 .comment-item {
     margin-bottom: 10px;
+    display: flex;
+    margin-right: 20px;
+    border-radius: 10px;
 }
+
+.comment-profile-pic{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+
+.commenter-name{
+    margin-bottom: 5px;
+}
+
+.commenter-fieldOfStudy{
+    font-size: 12px;
+}
+
+.commenter-main-info-header{
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.comment-timeago{
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+.commenter-main-info{
+    margin-bottom: 10px;
+}
+
+.comment-left-detail{
+    padding: 10px;
+    background-color: #d3d8dc;
+}
+
+.commenter-name{
+    color: #3498db;
+}
+
+.comment-left-detail{
+    width: 90%;
+}
+
