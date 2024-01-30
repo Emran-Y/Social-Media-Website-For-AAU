@@ -3,8 +3,7 @@
     flex-direction: column;
     max-width: 300px;
     margin-block: 5px;
-    margin-right: 0px;
-    margin-left: auto;
+    align-self: flex-end;
 }
 
 .text-cont-right {
