@@ -1,15 +1,182 @@
 import React from "react";
-import "./ClubAdminMyClub.css";
-import { useNavigate } from "react-router-dom";
+import "./clubAdminMyClub.css";
+import LeftText from "../../textMessages/leftText/LeftText";
+import RightText from "../../textMessages/rightText/RightText";
+import { format } from "timeago.js";
 
 function ClubAdminMyClub() {
-  const navigate = useNavigate();
+  const [myClub, setMyClub] = React.useState();
+  const [msg, setMsg] = React.useState("");
+  const [clickedChat, setClickedChat] = React.useState();
+  const [lodded, setLodded] = React.useState(false);
+  const [messages, setMessages] = React.useState([]);
+
   React.useEffect(() => {
-    if (!localStorage.getItem("userData")) {
-      navigate("/login");
-    }
+    fetch("http://localhost:5011/api/club/myOwnClub", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("userData")) &&
+          JSON.parse(localStorage.getItem("userData")).token
+        }`,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setLodded(true);
+        console.log(data);
+        setMyClub(data);
+      })
+      .catch((error) => {
+        console.error("Fetch error:", error);
+        // Handle the error as needed
+      });
   }, []);
-  return <div>ClubAdminMyClub</div>;
+
+  const typingHandler = (e) => {
+    setMsg(e.target.value);
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!msg) return;
+    fetch("http://localhost:5011/api/message/sendMessage", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("userData")) &&
+          JSON.parse(localStorage.getItem("userData")).token
+        }`,
+      },
+      body: JSON.stringify({
+        content: msg,
+        clubId: clickedChat._id,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setMessages([...messages, data]);
+        setMsg("");
+      })
+      .catch((error) => {
+        console.error("Fetch error:", error);
+        // Handle the error as needed
+      });
+  };
+  const handleClubCardClicked = (club) => {
+    setClickedChat(club);
+    fetch(`http://localhost:5011/api/message/fetchAllMessages/${club._id}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("userData")) &&
+          JSON.parse(localStorage.getItem("userData")).token
+        }`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => setMessages(data))
+      .catch((error) => {
+        console.error("Fetch error:", error);
+        // Handle the error as needed
+      });
+  };
+  return (
+    <div className="usermyown-chatting-container">
+      <div className="usermyown-chatting-container-left">
+        <div className="usermyown-chatting-container-left-header">
+          <h2 className="usermyown-chatting-container-left-header-title">
+            My Chats
+          </h2>
+        </div>
+        <div className="usermyown-chatting-container-left-main">
+          {lodded ? (
+            <div
+              onClick={() => handleClubCardClicked(myClub)}
+              className="usermyown-chatting-container-left-main-card"
+            >
+              <h2 className="usermyown-chatting-container-left-main-card-title">
+                {myClub.clubName}
+              </h2>
+              <p className="usermyown-chatting-container-left-main-card-message">
+                {" "}
+                <strong>{myClub.clubName}</strong>:{" "}
+                {myClub.latestMessage && myClub.latestMessage.message}
+              </p>
+            </div>
+          ) : (
+            <div className="nice-spinner"></div>
+          )}
+        </div>
+      </div>
+      <div className="usermyown-chatting-container-right">
+        {clickedChat ? (
+          <div className="component-wrapper">
+            <div className="usermyown-chatting-container-right-header">
+              <h2>{clickedChat.clubName}</h2>
+            </div>
+            <div className="usermyown-chatting-container-right-below">
+              <div className="usermyown-chatting-container-right-main">
+                {messages.length > 0 && (
+                  <>
+                    {messages.map((msg) =>
+                      JSON.parse(localStorage.getItem("userData")) &&
+                      JSON.parse(localStorage.getItem("userData")).userId !==
+                        msg.sender._id ? (
+                        <LeftText
+                          key={msg._id}
+                          userId={msg.sender._id}
+                          content={msg.content}
+                          name={msg.sender.fullName}
+                          pic={msg.sender.profilePicture}
+                          time={format(msg.createdAt)}
+                        />
+                      ) : (
+                        <RightText
+                          key={msg._id}
+                          content={msg.content}
+                          name={
+                            JSON.parse(localStorage.getItem("userData")) &&
+                            JSON.parse(localStorage.getItem("userData"))
+                              .fullName
+                          }
+                          time={format(msg.createdAt)}
+                        />
+                      )
+                    )}
+                  </>
+                )}
+              </div>
+              <form
+                className="usermyown-chatting-container-right-footer"
+                onSubmit={(e) => handleSubmit(e)}
+              >
+                <input
+                  type="text"
+                  value={msg}
+                  onChange={(e) => typingHandler(e)}
+                  className="msg-input"
+                  placeholder="Send a message"
+                />
+                <button type="submit" className="send-btn">
+                  send
+                </button>
+              </form>
+            </div>
+          </div>
+        ) : (
+          <div className="start-chat-container">
+            <h1 className="start-chat">Click on a Club to Start Chatting</h1>
+          </div>
+        )}
+      </div>
+    </div>
+  );
 }
 
 export default ClubAdminMyClub;
