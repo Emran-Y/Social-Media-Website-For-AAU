@@ -3,6 +3,9 @@ import "./clubAdminMyClub.css";
 import LeftText from "../../textMessages/leftText/LeftText";
 import RightText from "../../textMessages/rightText/RightText";
 import { format } from "timeago.js";
+import io from "socket.io-client";
+
+const socket = io.connect("http://localhost:5011");
 
 function ClubAdminMyClub() {
   const [myClub, setMyClub] = React.useState();
@@ -10,6 +13,12 @@ function ClubAdminMyClub() {
   const [clickedChat, setClickedChat] = React.useState();
   const [lodded, setLodded] = React.useState(false);
   const [messages, setMessages] = React.useState([]);
+  const [room, setRoom] = React.useState("");
+
+  React.useEffect(() => {
+    if (!room) return;
+    socket.emit("join_room", room);
+  }, [room]);
 
   const [isRemoved, setIsRemoved] = React.useState("right");
 
@@ -92,7 +101,8 @@ function ClubAdminMyClub() {
     })
       .then((response) => response.json())
       .then((data) => {
-        setMessages([...messages, data]);
+        socket.emit("send_message", { text: data, room });
+        setMessages((prevMessages) => [...prevMessages, data]);
         setMsg("");
       })
       .catch((error) => {
@@ -100,6 +110,12 @@ function ClubAdminMyClub() {
         // Handle the error as needed
       });
   };
+
+  React.useEffect(() => {
+    socket.on("receive_message", (message) => {
+      setMessages((prevMessages) => [...prevMessages, message]);
+    });
+  }, [socket]);
   const handleClubCardClicked = (club) => {
     setClickedChat(club);
     fetch(`http://localhost:5011/api/message/fetchAllMessages/${club._id}`, {
@@ -133,7 +149,10 @@ function ClubAdminMyClub() {
         <div className="usermyown-chatting-container-left-main">
           {lodded ? (
             <div
-              onClick={() => handleClubCardClicked(myClub)}
+              onClick={() => {
+                handleClubCardClicked(myClub);
+                setRoom(myClub._id);
+              }}
               className="usermyown-chatting-container-left-main-card"
             >
               <h2 className="usermyown-chatting-container-left-main-card-title">

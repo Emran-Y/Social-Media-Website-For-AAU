@@ -3,6 +3,9 @@ import "./userMyOwnClub.css";
 import LeftText from "../../textMessages/leftText/LeftText";
 import RightText from "../../textMessages/rightText/RightText";
 import { format } from "timeago.js";
+import io from "socket.io-client";
+
+const socket = io.connect("http://localhost:5011");
 
 function UserMyOwnClub() {
   const [myClubs, setMyClubs] = React.useState([]);
@@ -11,6 +14,12 @@ function UserMyOwnClub() {
   const [lodded, setLodded] = React.useState(false);
   const [messages, setMessages] = React.useState([]);
   const [isRemoved, setIsRemoved] = React.useState("right");
+  const [room, setRoom] = React.useState("");
+
+  React.useEffect(() => {
+    if (!room) return;
+    socket.emit("join_room", room);
+  }, [clickedChat]);
 
   React.useEffect(() => {
     console.log("called");
@@ -91,7 +100,8 @@ function UserMyOwnClub() {
     })
       .then((response) => response.json())
       .then((data) => {
-        setMessages([...messages, data]);
+        socket.emit("send_message", { text: data, room });
+        setMessages((prevMessages) => [...prevMessages, data]);
         setMsg("");
       })
       .catch((error) => {
@@ -99,6 +109,12 @@ function UserMyOwnClub() {
         // Handle the error as needed
       });
   };
+
+  React.useEffect(() => {
+    socket.on("receive_message", (message) => {
+      setMessages((prevMessages) => [...prevMessages, message]);
+    });
+  }, [socket]);
   const handleClubCardClicked = (club) => {
     setClickedChat(club);
     fetch(`http://localhost:5011/api/message/fetchAllMessages/${club._id}`, {
@@ -135,7 +151,10 @@ function UserMyOwnClub() {
             myClubs.map((club) => {
               return (
                 <div
-                  onClick={() => handleClubCardClicked(club)}
+                  onClick={() => {
+                    handleClubCardClicked(club);
+                    setRoom(club._id);
+                  }}
                   className="usermyown-chatting-container-left-main-card"
                 >
                   <h2 className="usermyown-chatting-container-left-main-card-title">
