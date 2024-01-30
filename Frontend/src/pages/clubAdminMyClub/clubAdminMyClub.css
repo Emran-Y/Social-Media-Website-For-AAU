@@ -1,0 +1,222 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.usermyown-chatting-container {
+    display: flex;
+    justify-content: space-around;
+    overflow-x: hidden;
+    margin-block: 10px;
+}
+
+.usermyown-chatting-container-left {
+    width: 28%;
+    background-color: white;
+    height: 85vh;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 10px;
+    overflow-y: scroll;
+    position: relative;
+    padding-bottom: 20px;
+    border: 1px solid #3A7BBA;
+}
+
+.usermyown-chatting-container-left {
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    /* Firefox */
+    scrollbar-color: transparent transparent;
+    /* Firefox */
+}
+
+.usermyown-chatting-container-left::-webkit-scrollbar {
+    width: 0.5em;
+    /* Webkit */
+}
+
+.usermyown-chatting-container-left::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    /* Webkit */
+}
+
+.usermyown-chatting-container-left-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-inline: 10px;
+    padding-top: 15px;
+    padding-bottom: 20px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    position: sticky;
+    inset: 0;
+    z-index: 3;
+    background-color: white;
+}
+
+.usermyown-chatting-container-left-header-title {
+    font-weight: 300;
+}
+
+
+.usermyown-chatting-container-left-main {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    margin-inline: 20px;
+}
+
+
+.usermyown-chatting-container-left-main-card {
+    min-width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    padding-left: 10px;
+    margin-inline: 30px;
+    padding-block: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+}
+
+.usermyown-chatting-container-left-main-card-title {
+    font-weight: 300;
+}
+
+.usermyown-chatting-container-left-main-card-message {
+    font-size: 14px;
+}
+
+
+
+
+.start-chat-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.start-chat {
+    font-weight: 300;
+}
+
+
+
+
+
+.usermyown-chatting-container-right {
+    width: 65%;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 10px;
+    min-height: 85vh;
+    max-height: 85vh;
+    border: 1px solid #3A7BBA;
+}
+
+.component-wrapper {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.usermyown-chatting-container-right-header {
+    min-height: 10%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding-inline: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.usermyown-chatting-container-right-below {
+    min-height: 90%;
+}
+
+/* Elements of  .usermyown-chatting-container-right-below*/
+
+.usermyown-chatting-container-right-main {
+    min-height: 90%;
+    min-width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow-y: scroll;
+    padding-inline: 20px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+
+
+
+.usermyown-chatting-container-right-footer {
+    min-height: 10%;
+    min-width: 100%;
+    display: block;
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    background-color: #fff;
+}
+
+
+.msg-input {
+    min-height: 100%;
+    border: none;
+    width: 90%;
+    outline: none;
+    padding-left: 10px;
+    position: absolute;
+}
+
+/* .rightBar-main{
+    justify-self: flex-end;
+} */
+
+.send-btn {
+    min-height: 100%;
+    border: none;
+    background-color: #1DB954;
+    width: 10%;
+    color: white;
+
+    text-shadow: 0px 0px 0px 1px black;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+
+}
+
+
+
+@media(max-width:1000px) {
+    .usermyown-chatting-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .usermyown-chatting-container-left {
+        width: 100vw;
+    }
+
+    .usermyown-chatting-container-right {
+        width: 100vw;
+        height: 100vh;
+    }
+
+
+
+}
+
+.isRemoved {
+    display: none;
+}

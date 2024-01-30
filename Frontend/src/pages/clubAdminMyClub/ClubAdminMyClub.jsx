@@ -11,6 +11,38 @@ function ClubAdminMyClub() {
   const [lodded, setLodded] = React.useState(false);
   const [messages, setMessages] = React.useState([]);
 
+  const [isRemoved, setIsRemoved] = React.useState("right");
+
+  React.useEffect(() => {
+    console.log("called");
+
+    const handleResize = () => {
+      if (window.innerWidth < 1000 && clickedChat) {
+        setIsRemoved("left");
+      } else if (window.innerWidth < 1000 && !clickedChat) {
+        setIsRemoved("right");
+      } else {
+        setIsRemoved("");
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [clickedChat]); // You can choose to include clickedChat in the dependencies array if needed
+
+  React.useEffect(() => {
+    if (window.innerWidth < 1000 && clickedChat) {
+      setIsRemoved("left");
+    } else if (window.innerWidth < 1000 && !clickedChat) {
+      setIsRemoved("right");
+    } else {
+      setIsRemoved("");
+    }
+  }, [clickedChat]);
+
   React.useEffect(() => {
     fetch("http://localhost:5011/api/club/myOwnClub", {
       method: "GET",
@@ -88,7 +120,11 @@ function ClubAdminMyClub() {
   };
   return (
     <div className="usermyown-chatting-container">
-      <div className="usermyown-chatting-container-left">
+      <div
+        className={`usermyown-chatting-container-left ${
+          isRemoved == "left" ? "isRemoved" : ""
+        }`}
+      >
         <div className="usermyown-chatting-container-left-header">
           <h2 className="usermyown-chatting-container-left-header-title">
             My Chats
@@ -114,7 +150,11 @@ function ClubAdminMyClub() {
           )}
         </div>
       </div>
-      <div className="usermyown-chatting-container-right">
+      <div
+        className={`usermyown-chatting-container-right ${
+          isRemoved == "right" ? "isRemoved" : ""
+        }`}
+      >
         {clickedChat ? (
           <div className="component-wrapper">
             <div className="usermyown-chatting-container-right-header">

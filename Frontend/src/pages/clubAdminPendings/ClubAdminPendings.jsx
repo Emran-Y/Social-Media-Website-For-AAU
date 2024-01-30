@@ -55,22 +55,28 @@ function ClubAdminPendings() {
 
   return (
     <div className="clubadminpendings-container">
-      {pendings.map((pending) => (
-        <div key={pending.userId} className="clubadminpendings-card">
-          <Link
-            to={`/profile/${pending._id}`}
-            className="clubadminpendings-username"
-          >
-            {pending.fullName}
-          </Link>
-          <button
-            className="clubadminpendings-acceptButton"
-            onClick={() => handleAccept(pending._id)}
-          >
-            Accept
-          </button>
+      {pendings.length > 0 ? (
+        pendings.map((pending) => (
+          <div key={pending.userId} className="clubadminpendings-card">
+            <Link
+              to={`/profile/${pending._id}`}
+              className="clubadminpendings-username"
+            >
+              {pending.fullName}
+            </Link>
+            <button
+              className="clubadminpendings-acceptButton"
+              onClick={() => handleAccept(pending._id)}
+            >
+              Accept
+            </button>
+          </div>
+        ))
+      ) : (
+        <div className="clubadminpendings-card">
+          <p className="clubadminpendings-username">No Pending Requests</p>
         </div>
-      ))}
+      )}
     </div>
   );
 }

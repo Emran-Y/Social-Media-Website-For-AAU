@@ -28,10 +28,16 @@ function Layout() {
   }, [location.pathname, window.innerWidth]);
 
   return (
-    <div>
+    <div
+      style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
+    >
       <Header />
       <Outlet />
-      {footerDisplay && <Footer />}
+      <div style={{ flex: "1" }}>
+        {/* This div ensures that the content takes up remaining space */}
+        {/* Remove this div if you want the footer to overlay the content */}
+      </div>
+      {footerDisplay && <Footer style={{ position: "relative" }} />}
     </div>
   );
 }
