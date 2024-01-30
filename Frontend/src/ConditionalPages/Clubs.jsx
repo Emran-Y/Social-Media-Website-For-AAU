@@ -5,8 +5,11 @@ import UserClubs from "../pages/userClubs/UserClubs";
 function Clubs() {
   return (
     <div>
-      <ClubAdminPendings />
-      <UserClubs />
+      {JSON.parse(localStorage.getItem("userData")).clubAdmin ? (
+        <ClubAdminPendings />
+      ) : (
+        <UserClubs />
+      )}
     </div>
   );
 }

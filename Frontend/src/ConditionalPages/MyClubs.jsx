@@ -1,11 +1,14 @@
 import React from "react";
 import ClubAdminMyClub from "../pages/clubAdminMyClub/ClubAdminMyClub";
-import UserClubs from "../pages/userClubs/UserClubs";
+import UserMyOwnClub from "../pages/userMyOwnClub/UserMyOwnClub";
 function MyClubs() {
   return (
     <div>
-      <ClubAdminMyClub />
-      <UserClubs />
+      {JSON.parse(localStorage.getItem("userData")).clubAdmin ? (
+        <ClubAdminMyClub />
+      ) : (
+        <UserMyOwnClub />
+      )}
     </div>
   );
 }

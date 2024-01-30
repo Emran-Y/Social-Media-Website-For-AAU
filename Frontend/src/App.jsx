@@ -7,6 +7,7 @@ import Announcement from "./pages/announcement/Announcement";
 import JobsAndInternships from "./pages/jobsAndInternships/JobsAndInternships";
 import LostAndFound from "./pages/lostAndFound/LostAndFound";
 import Profile from "./pages/profile/Profile";
+import UserProfile from "./pages/UserProfile/userProfile";
 import NotFound from "./pages/NotFound/NotFound"; // Add the import for your 404 component
 import MyClubs from "./ConditionalPages/MyClubs";
 import Clubs from "./ConditionalPages/clubs";
@@ -26,6 +27,8 @@ function App() {
             />
             <Route path="/lostAndFound" element={<LostAndFound />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/profile/:userId" element={<UserProfile />} />
+
             <Route path="/clubs" element={<Clubs />} />
             <Route path="/myclubs" element={<MyClubs />} />
             {/* 404 route */}

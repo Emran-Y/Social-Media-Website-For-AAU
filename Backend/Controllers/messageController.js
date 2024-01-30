@@ -11,7 +11,8 @@ const sendMessage = async (req, res) => {
   });
   try {
     const savedMessage = await newMessage.save();
-    return res.status(200).json(savedMessage);
+    const populatedMessage = await savedMessage.populate("sender", "-password");
+    return res.status(200).json(populatedMessage);
   } catch (err) {
     return res.status(500).json(err);
   }
@@ -20,8 +21,8 @@ const sendMessage = async (req, res) => {
 const fetchAllMessages = async (req, res) => {
   try {
     const messages = await Message.find({ clubId: req.params.id })
-      .sort({ updatedAt: -1 })
-      .populate("sender", "username profilePicture _id")
+      .sort({ updatedAt: 1 })
+      .populate("sender", "fullName profilePicture _id")
       .populate("clubId", "clubName _id admin");
     return res.status(200).json(messages);
   } catch (err) {

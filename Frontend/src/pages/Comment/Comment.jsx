@@ -87,7 +87,12 @@ const CommentSection = ({ announcementId }) => {
                   {/* <Link to={`/profile/${comment.userId}`}>Emran</Link> */}
                   <div className="commenter-main-info-header">
                     <Link
-                      to={`/profile/${comment.userId._id}`}
+                      to={
+                        comment.userId._id ===
+                        JSON.parse(localStorage.getItem("userData")).userId
+                          ? "/profile"
+                          : `/profile/${comment.userId._id}`
+                      }
                       className="commenter-name"
                     >
                       {comment.userId.fullName}{" "}
