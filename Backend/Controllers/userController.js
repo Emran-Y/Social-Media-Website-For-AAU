@@ -105,7 +105,7 @@ const registerUser = async (req, res) => {
     fieldOfStudy: req.body.fieldOfStudy,
     username: req.body.username,
     password: hashedPassword,
-    ...(req.body.profilePic && { profilePic: req.body.profilePic }),
+    ...(req.body.profilePicture && { profilePicture: req.body.profilePicture }),
   });
 
   // Save the new user to the database

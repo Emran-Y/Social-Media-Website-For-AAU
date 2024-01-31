@@ -14,7 +14,7 @@ function Signup() {
   const navigate = useNavigate();
   React.useEffect(() => {
     if (localStorage.getItem("userData")) {
-      navigate("/announcement");
+      navigate("/");
     }
   }, []);
 
@@ -28,6 +28,7 @@ function Signup() {
   const [password, setPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
   const [profilePicture, setProfilePicture] = React.useState("");
+  const [isUploading, setIsUploading] = React.useState(false);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -103,6 +104,28 @@ function Signup() {
         }
       });
   };
+
+  const handleFileChange = (image) => {
+    setIsUploading(true);
+    const data = new FormData();
+    data.append("file", image);
+    data.append("upload_preset", "tohco7vu");
+
+    fetch(`https://api.cloudinary.com/v1_1/difavbhph/image/upload`, {
+      method: "post",
+      body: data,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setProfilePicture(data.secure_url);
+        setIsUploading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsUploading(false);
+      });
+  };
+
   return (
     <div className="signup-container">
       <div className="signup-header">
@@ -173,13 +196,16 @@ function Signup() {
                 className="signup-username"
               />
             </div>
-            <div className="signup-username-container">
-              <GiEgyptianProfile className="signup-username-icon" />
+            <div className="signup-username-container-profile">
+              <p className="signup-username-container-profile-title">
+                Profile Picture (<strong>optional</strong>)
+              </p>
               <input
-                value={profilePicture}
-                onChange={(e) => setProfilePicture(e.target.value)}
-                placeholder="Profile Picture URL (Optional)"
+                onChange={(e) => handleFileChange(e.target.files[0])}
+                placeholder="Profile Picture"
                 className="signup-username"
+                type="file"
+                id="profile-pic"
               />
             </div>
             <div className="signup-password-container">
@@ -206,7 +232,9 @@ function Signup() {
               />
             </div>
             {showError && <p className="signup-error-message">{erroMessage}</p>}
-            <button className="signup-btn">Sign Up</button>
+            <button className="signup-btn">
+              {isUploading ? "uploading..." : "Sign Up"}
+            </button>
           </form>
         </div>
       </div>

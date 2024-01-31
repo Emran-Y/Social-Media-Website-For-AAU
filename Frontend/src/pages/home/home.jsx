@@ -1,13 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./home.css";
-import { useNavigate } from "react-router-dom";
 
 function Home() {
-  // const navigate = useNavigate();
-  // if (!localStorage.getItem("userData")) {
-  //   navigate("/login");
-  // }
   return (
     <div className="home-page-container">
       <div className="home-page-content">

@@ -31,7 +31,11 @@ function Header() {
       <div className="header-2">
         <Link to="profile">
           <img
-            src={userData && userData.profilePicture}
+            src={
+              userData
+                ? userData.profilePicture
+                : "https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Images.png"
+            }
             alt="profile pic"
             className="header-profile"
           ></img>

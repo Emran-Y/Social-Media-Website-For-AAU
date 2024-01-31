@@ -1,7 +1,13 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 function userProfile() {
+  const navigate = useNavigate();
+  React.useEffect(() => {
+    if (!localStorage.getItem("userData")) {
+      navigate("/login");
+    }
+  }, []);
   const { userId } = useParams();
   const [thisUserData, setThisUserData] = React.useState({}); // [1
   React.useEffect(() => {

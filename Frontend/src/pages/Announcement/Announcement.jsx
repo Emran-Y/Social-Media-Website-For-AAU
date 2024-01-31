@@ -6,12 +6,26 @@ import "./announcement.css";
 import { FaRegThumbsUp } from "react-icons/fa";
 import { FaRegCommentDots } from "react-icons/fa";
 import CommentSection from "../Comment/Comment";
+import { useNavigate } from "react-router-dom";
 
 function Announcement() {
+  const navigate = useNavigate();
+  React.useEffect(() => {
+    if (!localStorage.getItem("userData")) {
+      navigate("/login");
+    }
+  }, []);
   const [announcements, setAnnouncements] = useState([]);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoaded, setIsLoaded] = useState(true);
   const [likes, setLikes] = useState([]);
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+  });
+  const [profilePicture, setProfilePicture] = React.useState("");
+  const [isUploading, setIsUploading] = React.useState(false);
+
   const [currentCommentingAnnouncemnt, setCurrentCommentingAnnouncemnt] =
     useState("");
 
@@ -35,11 +49,7 @@ function Announcement() {
         console.error("Error fetching likes:", error);
       });
   }, []);
-  const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    picture: "",
-  });
+
   const handleSubmit = (event) => {
     event.preventDefault();
     if (formData.title == "" || formData.description == "") {
@@ -56,7 +66,7 @@ function Announcement() {
           JSON.parse(localStorage.getItem("userData")).token
         }`,
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify({ ...formData, picture: profilePicture }),
     })
       .then((response) => response.json())
       .then((data) => {
@@ -138,6 +148,27 @@ function Announcement() {
 
   // JSX for the announcement card
 
+  const handleFileChange = (image) => {
+    setIsUploading(true);
+    const data = new FormData();
+    data.append("file", image);
+    data.append("upload_preset", "tohco7vu");
+
+    fetch(`https://api.cloudinary.com/v1_1/difavbhph/image/upload`, {
+      method: "post",
+      body: data,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setProfilePicture(data.secure_url);
+        setIsUploading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsUploading(false);
+      });
+  };
+
   return (
     <div className="announcement-page">
       {isAdmin && (
@@ -170,17 +201,17 @@ function Announcement() {
           <label className="announcement-form-label">
             Picture:
             <input
-              type="text"
+              type="file"
               name="picture"
-              value={formData.picture}
-              onChange={handleChange}
+              onChange={(e) => handleFileChange(e.target.files[0])}
               // Add state and event handlers here
               className="announcement-form-input"
+              placeholder="Upload a picture"
             />
           </label>
 
           <button type="submit" className="announcement-form-button">
-            Post Announcement
+            {isUploading ? "uploading..." : "Post Announcement"}
           </button>
         </form>
       )}

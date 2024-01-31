@@ -2,6 +2,7 @@ import React from "react";
 import "./Profile.css";
 import { useNavigate } from "react-router-dom";
 import { format } from "timeago.js";
+import { MdEdit } from "react-icons/md";
 
 function Profile() {
   const [userData, setUserData] = React.useState({}); // [1
@@ -79,7 +80,7 @@ function Profile() {
     const confirmation = window.confirm("Are you sure you want to log out?");
     if (confirmation) {
       localStorage.removeItem("userData");
-      navigate("/login");
+      navigate("/");
     }
   };
 

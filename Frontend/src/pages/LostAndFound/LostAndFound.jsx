@@ -4,20 +4,22 @@ import "./LostAndFound.css";
 import { format } from "timeago.js";
 
 function LostAndFound() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    picture: "",
   });
   const [lostAndFoundItems, setLostAndFoundItems] = useState([]);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoaded, setIsLoaded] = useState(true);
+  const [profilePicture, setProfilePicture] = React.useState("");
+  const [isUploading, setIsUploading] = React.useState(false);
 
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("userData"));
     if (!userData) {
       // Redirect to login if user data is not available
-      navigate("/login");
+      navigate("/");
     } else {
       setIsAdmin(userData.isAdmin);
 
@@ -67,7 +69,7 @@ function LostAndFound() {
           JSON.parse(localStorage.getItem("userData")).token
         }`,
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify({ ...formData, picture: profilePicture }),
     })
       .then((response) => response.json())
       .then((data) => {
@@ -81,8 +83,28 @@ function LostAndFound() {
     setFormData({
       title: "",
       description: "",
-      picture: "",
     });
+  };
+
+  const handleFileChange = (image) => {
+    setIsUploading(true);
+    const data = new FormData();
+    data.append("file", image);
+    data.append("upload_preset", "tohco7vu");
+
+    fetch(`https://api.cloudinary.com/v1_1/difavbhph/image/upload`, {
+      method: "post",
+      body: data,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setProfilePicture(data.secure_url);
+        setIsUploading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsUploading(false);
+      });
   };
 
   return (
@@ -116,16 +138,15 @@ function LostAndFound() {
             <label className="lostandfound-label">
               Picture (Optional):
               <input
-                type="url"
+                type="file"
                 name="picture"
-                value={formData.picture}
-                onChange={handleInputChange}
+                onChange={(e) => handleFileChange(e.target.files[0])}
                 className="lostandfound-input"
               />
             </label>
 
             <button type="submit" className="lostandfound-button">
-              Submit
+              {isUploading ? "Uploading..." : "Submit"}
             </button>
           </form>
         )}

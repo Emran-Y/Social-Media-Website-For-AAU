@@ -7,7 +7,7 @@ function Login() {
   const navigate = useNavigate();
   React.useEffect(() => {
     if (localStorage.getItem("userData")) {
-      navigate("/announcement");
+      navigate("/");
     }
   }, []);
   const [username, setUsername] = React.useState("");

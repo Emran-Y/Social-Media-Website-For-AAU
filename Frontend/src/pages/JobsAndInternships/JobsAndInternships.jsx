@@ -10,17 +10,19 @@ function JobsAndInternships() {
     link: "",
     description: "",
     deadline: "",
-    picture: "",
   });
   const navigate = useNavigate();
   const [jobsAndInternships, setJobsAndInternships] = useState([]);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoaded, setIsLoaded] = useState(true);
 
+  const [profilePicture, setProfilePicture] = React.useState("");
+  const [isUploading, setIsUploading] = React.useState(false);
+
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("userData"));
     if (!userData) {
-      navigate("/login");
+      navigate("/");
     } else {
       setIsAdmin(userData.isAdmin);
 
@@ -75,7 +77,7 @@ function JobsAndInternships() {
           JSON.parse(localStorage.getItem("userData")).token
         }`,
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify({ ...formData, picture: profilePicture }),
     })
       .then((response) => response.json())
       .then((data) => {
@@ -91,8 +93,28 @@ function JobsAndInternships() {
       link: "",
       description: "",
       deadline: "",
-      picture: "",
     });
+  };
+
+  const handleFileChange = (image) => {
+    setIsUploading(true);
+    const data = new FormData();
+    data.append("file", image);
+    data.append("upload_preset", "tohco7vu");
+
+    fetch(`https://api.cloudinary.com/v1_1/difavbhph/image/upload`, {
+      method: "post",
+      body: data,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setProfilePicture(data.secure_url);
+        setIsUploading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsUploading(false);
+      });
   };
 
   return (
@@ -162,16 +184,15 @@ function JobsAndInternships() {
             <label className="jobsandinternships-label">
               Picture (Optional):
               <input
-                type="url"
+                type="file"
                 name="picture"
-                value={formData.picture}
-                onChange={handleInputChange}
+                onChange={(e) => handleFileChange(e.target.files[0])}
                 className="jobsandinternships-input"
               />
             </label>
 
             <button type="submit" className="jobsandinternships-button">
-              Submit
+              {isUploading ? "Uploading..." : "Submit"}
             </button>
           </form>
         )}
