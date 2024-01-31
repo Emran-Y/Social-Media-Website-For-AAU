@@ -49,6 +49,58 @@ const fetchAllComments = async (req, res) => {
     return res.status(500).json({ message: "Internal server error" });
   }
 };
+
+const deleteAnnouncement = async (req, res) => {
+  if (!req.user.isAdmin)
+    return res
+      .status(403)
+      .json({ message: "You are not allowed to delete announcements" });
+  try {
+    const deletedAnnouncement = await Announcement.findByIdAndDelete(
+      req.params.announcementId
+    );
+    if (!deletedAnnouncement)
+      return res.status(404).json({ message: "Announcement not found" });
+    return res.status(200).json({ message: "Announcement deleted" });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+const updateAnnouncement = async (req, res) => {
+  if (!req.user.isAdmin) {
+    return res
+      .status(403)
+      .json({ message: "You are not allowed to update announcements" });
+  }
+
+  try {
+    const updatedAnnouncement = await Announcement.findByIdAndUpdate(
+      req.params.announcementId,
+      {
+        $set: {
+          title: req.body.title,
+          description: req.body.description,
+          picture: req.body.picture,
+        },
+      },
+      { new: true }
+    );
+
+    if (!updatedAnnouncement) {
+      return res.status(404).json({ message: "Announcement not found" });
+    }
+
+    return res.status(200).json(updatedAnnouncement);
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 module.exports.postAnnouncement = postAnnouncement;
 module.exports.fetchAllComments = fetchAllComments;
 module.exports.fetchAllAnnouncement = fetchAllAnnouncement;
+module.exports.deleteAnnouncement = deleteAnnouncement;
+module.exports.updateAnnouncement = updateAnnouncement;

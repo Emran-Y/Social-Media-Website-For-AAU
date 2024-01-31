@@ -1,3 +1,5 @@
+// JobsAndInternships.js
+
 import React, { useState, useEffect } from "react";
 import "./JobsAndInternships.css";
 import { useNavigate } from "react-router-dom";
@@ -18,6 +20,8 @@ function JobsAndInternships() {
 
   const [profilePicture, setProfilePicture] = React.useState("");
   const [isUploading, setIsUploading] = React.useState(false);
+
+  const [currentEditingJob, setCurrentEditingJob] = useState("");
 
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("userData"));
@@ -66,6 +70,7 @@ function JobsAndInternships() {
       alert("Please fill all the fields");
       return;
     }
+
     // Your code for handling the form submission goes here
     console.log("Form data submitted:", formData);
     fetch("http://localhost:5011/api/jobsAndInternships/post", {
@@ -114,6 +119,70 @@ function JobsAndInternships() {
       .catch((err) => {
         console.log(err);
         setIsUploading(false);
+      });
+  };
+
+  const handleDelete = (id) => {
+    fetch(`http://localhost:5011/api/jobsAndInternships/delete/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("userData")) &&
+          JSON.parse(localStorage.getItem("userData")).token
+        }`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+        setJobsAndInternships((prevData) =>
+          prevData.filter((item) => item._id !== id)
+        );
+      })
+      .catch((error) => {
+        console.error("Error deleting job or internship:", error);
+      });
+  };
+
+  const handleUpdate = (id) => {
+    const updatedJob = {
+      title: formData.title,
+      company: formData.company,
+      link: formData.link,
+      description: formData.description,
+      deadline: formData.deadline,
+      picture: profilePicture,
+    };
+
+    fetch(`http://localhost:5011/api/jobsAndInternships/update/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("userData")) &&
+          JSON.parse(localStorage.getItem("userData")).token
+        }`,
+      },
+      body: JSON.stringify(updatedJob),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setJobsAndInternships(
+          jobsAndInternships.map((job) =>
+            job._id === id ? { ...job, ...data } : job
+          )
+        );
+        setFormData({
+          title: "",
+          company: "",
+          link: "",
+          description: "",
+          deadline: "",
+        });
+        setCurrentEditingJob("");
+      })
+      .catch((error) => {
+        console.error("Error updating job or internship:", error);
       });
   };
 
@@ -201,42 +270,52 @@ function JobsAndInternships() {
         {isLoaded ? (
           <div className="nice-spinner"></div>
         ) : (
-          jobsAndInternships &&
-          jobsAndInternships.map((jobOrInternship) => {
-            return (
-              <div
-                key={jobOrInternship._id}
-                className="jobsandinternships-card"
-              >
-                <h2 className="jobsandinternships-card-title">
-                  {jobOrInternship.title} | {jobOrInternship.company}
-                </h2>
-                <div className="jobsandinternships-card-middle">
-                  <img
-                    src={jobOrInternship.picture}
-                    alt="jobs and internships image"
-                    className="jobsandinternships-card-img"
-                  />
-                  <p className="jobsandinternships-card-desc">
-                    {jobOrInternship.description}
-                  </p>
-                </div>
-                <div className="jobsandinternships-card-bottom">
-                  <p className="jobsandinternships-card-date">
-                    Deadline: {jobOrInternship.deadline}
-                  </p>
-                  <a
-                    className="jobsandinternships-card-link"
-                    href={jobOrInternship.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Apply
-                  </a>
-                </div>
+          jobsAndInternships.map((jobOrInternship) => (
+            <div key={jobOrInternship._id} className="jobsandinternships-card">
+              <h2 className="jobsandinternships-card-title">
+                {jobOrInternship.title} | {jobOrInternship.company}
+              </h2>
+              <div className="jobsandinternships-card-middle">
+                <img
+                  src={jobOrInternship.picture}
+                  alt="jobs and internships image"
+                  className="jobsandinternships-card-img"
+                />
+                <p className="jobsandinternships-card-desc">
+                  {jobOrInternship.description}
+                </p>
               </div>
-            );
-          })
+              {isAdmin && (
+                <div className="jobsandinternships-change-maker-button">
+                  <button
+                    onClick={() => handleUpdate(jobOrInternship._id)}
+                    className="jobsandinternships-update-button"
+                  >
+                    Update
+                  </button>
+                  <button
+                    onClick={() => handleDelete(jobOrInternship._id)}
+                    className="jobsandinternships-delete-button"
+                  >
+                    Delete
+                  </button>
+                </div>
+              )}
+              <div className="jobsandinternships-card-bottom">
+                <p className="jobsandinternships-card-date">
+                  Deadline: {jobOrInternship.deadline}
+                </p>
+                <a
+                  className="jobsandinternships-card-link"
+                  href={jobOrInternship.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Apply
+                </a>
+              </div>
+            </div>
+          ))
         )}
       </div>
     </div>

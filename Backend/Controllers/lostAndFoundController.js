@@ -34,5 +34,45 @@ const fetchLostAndFound = async (req, res) => {
   }
 };
 
+const updateLostAndFound = async (req, res) => {
+  if (!req.user.isAdmin)
+    return res
+      .status(403)
+      .json({ message: "You are not allowed to update lost  and founds" });
+
+  try {
+    const updatedLostAndFound = await LostAndFound.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: req.body,
+      },
+      { new: true }
+    );
+
+    res.status(200).json(updatedLostAndFound);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+const deleteLostAndFound = async (req, res) => {
+  if (!req.user.isAdmin)
+    return res
+      .status(403)
+      .json({ message: "You are not allowed to delete lost and founds" });
+  try {
+    const deletedLostAndFound = await LostAndFound.findByIdAndDelete(
+      req.params.id
+    );
+    res.status(200).json({ message: "Lost and found deleted" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 module.exports.postLostAndFound = postLostAndFound;
 module.exports.fetchLostAndFound = fetchLostAndFound;
+module.exports.updateLostAndFound = updateLostAndFound;
+module.exports.deleteLostAndFound = deleteLostAndFound;
