@@ -3,7 +3,7 @@
 ## Contributors
 
 - Moti Leggese
-- Meti
+- Meti Lemessa
 - Emran Yonas
 
 ## Table of Contents
@@ -17,7 +17,6 @@
   - [Backend](#backend)
   - [Frontend](#frontend)
 - [Contributing](#contributing)
-- [Screenshots](#screenshots)
 
 ## Introduction
 
@@ -115,9 +114,6 @@ The absence of a centralized information hub has led to communication gaps, hind
 
 We welcome contributions from the community. If you'd like to contribute.
 
-## Screenshots
 
-![Screenshot 1](screenshots/screenshot1.png)
-![Screenshot 2](screenshots/screenshot2.png)
 
 
