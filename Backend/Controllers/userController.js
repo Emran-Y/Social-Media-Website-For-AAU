@@ -210,9 +210,59 @@ const likeAnnouncement = async (req, res) => {
   }
 };
 
+const editProfile = async (req, res) => {
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      req.user._id,
+      {
+        $set: {
+          fullName: req.body.fullName,
+          fieldOfStudy: req.body.fieldOfStudy,
+          profilePicture: req.body.profilePicture,
+        },
+      },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    updatedUser.token = jwt.sign(
+      { userId: updatedUser._id },
+      process.env.JWT_SECRET_KEY,
+      { expiresIn: "30d" }
+    );
+
+    res
+      .status(200)
+      .json(
+        _.pick(updatedUser, [
+          "_id",
+          "token",
+          "isAdmin",
+          "fullName",
+          "username",
+          "clubAdmin",
+          "activities",
+          "fieldOfStudy",
+          "universityId",
+          "profilePicture",
+          "clubMemberships",
+          "pendingClubRequests",
+          "clubAdmin",
+        ])
+      );
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 module.exports.loginUser = loginUser;
 module.exports.registerUser = registerUser;
 module.exports.fetchLikes = fetchLikes;
 module.exports.fetchComments = fetchComments;
 module.exports.fetchUser = fetchUser;
 module.exports.likeAnnouncement = likeAnnouncement;
+module.exports.editProfile = editProfile;

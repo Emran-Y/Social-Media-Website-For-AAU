@@ -19,20 +19,24 @@
 
 .profile-logout-container{
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     width: 100vw;
     margin-right: 40px;
     margin-top: 20px;
     padding-right: 30px;
 }
 
-.profile-logout-btn{
+.profile-logout-btn,.profile-1-header-edit{
     border: none;
     background-color: red;
     color: white;
     padding:0.25rem 0.5rem;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.profile-1-header-edit{
+    background-color: blue;
 }
 
 .profile-img{
@@ -145,5 +149,114 @@
     .profile-logout-container{
         padding-right: 80px;
     }
+        .profile-1-header-edit{
+            position: absolute;
+        font-size: 20px;
+        inset: unset;
+        bottom: 0;
+        right: 0;
+        font-size:30px;
+        margin-right: 40px;
+        margin-bottom: 10px;
+        }
+        .profile-logout-container{
+            justify-content: flex-end;
+        }
+
     
+    
+}
+
+.profile-1-header{
+    position: relative;
+}
+
+
+/* Add these styles at the end of your existing CSS */
+
+.profile-1-header-edit-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+
+.profile-image-label {
+    font-size: 16px;
+    cursor: pointer;
+    color: #3a7bba;
+    margin-bottom: 10px;
+}
+
+.profile-image-input {
+    /* display: none; */
+}
+
+.profile-edit-inputs {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 20px;
+}
+
+.profile-input-label {
+    font-size: 14px;
+    color: #3a7bba;
+    margin-bottom: 5px;
+}
+
+.profile-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.profile-img-container {
+    text-align: start;
+    margin-bottom: 20px;
+}
+
+.profile-image-input{
+    border: 1px solid #ccc;
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+}
+
+
+.profile-edit-buttons {
+    display: flex;
+    margin-top: 10px;
+}
+
+.profile-1-header-cancel,
+.profile-1-header-save {
+    background-color: #3a7bba;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.profile-1-header-cancel:hover,
+.profile-1-header-save:hover {
+    background-color: #24598e;
+}
+
+/* Additional styles for responsiveness */
+
+@media screen and (max-width: 600px) {
+    .profile-img-container {
+        text-align: center;
+    }
+
+    .profile-edit-inputs {
+        max-width: none;
+    }
 }
