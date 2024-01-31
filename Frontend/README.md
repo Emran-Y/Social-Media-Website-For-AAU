@@ -46,4 +46,4 @@ ClubAdmin users have specific privileges associated with managing clubs. To acce
 
 2. After logging in, you'll have ClubAdmin privileges for the respective club.
 
-**Note:** Use the provided credentials based on the user type you want to test. If you have any questions or encounter issues, feel free to seek assistance.
+**Note:** Use the provided credentials based on the user type you want to test. If you have any questions or encounter issues, contact us.
