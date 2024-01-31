@@ -3,8 +3,12 @@
 import React, { useState, useEffect } from "react";
 import { format } from "timeago.js";
 import "./announcement.css";
-import { FaRegThumbsUp } from "react-icons/fa";
-import { FaRegCommentDots } from "react-icons/fa";
+import {
+  FaRegThumbsUp,
+  FaRegCommentDots,
+  FaTrashAlt,
+  FaEdit,
+} from "react-icons/fa";
 import CommentSection from "../Comment/Comment";
 import { useNavigate } from "react-router-dom";
 
@@ -52,10 +56,11 @@ function Announcement() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (formData.title == "" || formData.description == "") {
+    if (formData.title === "" || formData.description === "") {
       alert("Please fill in all the fields.");
       return;
     }
+
     // Post announcement
     fetch("http://localhost:5011/api/announcement/post", {
       method: "POST",
@@ -81,6 +86,7 @@ function Announcement() {
         console.error("Error posting announcement:", error);
       });
   };
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData({
@@ -88,6 +94,7 @@ function Announcement() {
       [name]: value,
     });
   };
+
   useEffect(() => {
     // Fetch announcements
     fetch("http://localhost:5011/api/announcement", {
@@ -115,7 +122,6 @@ function Announcement() {
     }
   }, []);
 
-  // Handle like
   const handleLike = (announcementId) => {
     fetch(`http://localhost:5011/api/user/like/${announcementId}`, {
       method: "GET",
@@ -139,14 +145,71 @@ function Announcement() {
       });
   };
 
-  // Handle comment
   const handleComment = (announcementId) => {
-    currentCommentingAnnouncemnt == ""
-      ? setCurrentCommentingAnnouncemnt(announcementId)
-      : setCurrentCommentingAnnouncemnt("");
+    setCurrentCommentingAnnouncemnt(
+      currentCommentingAnnouncemnt === announcementId ? "" : announcementId
+    );
   };
 
-  // JSX for the announcement card
+  const handleDelete = (announcementId) => {
+    // Delete announcement
+    fetch(`http://localhost:5011/api/announcement/delete/${announcementId}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("userData")) &&
+          JSON.parse(localStorage.getItem("userData")).token
+        }`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setAnnouncements(announcements.filter((a) => a._id !== announcementId));
+      })
+      .catch((error) => {
+        console.error("Error deleting announcement:", error);
+      });
+  };
+
+  const handleUpdate = (announcementId) => {
+    // Update announcement
+    const updatedAnnouncement = {
+      title: formData.title,
+      description: formData.description,
+      picture: profilePicture,
+    };
+
+    fetch(`http://localhost:5011/api/announcement/update/${announcementId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("userData")) &&
+          JSON.parse(localStorage.getItem("userData")).token
+        }`,
+      },
+      body: JSON.stringify(updatedAnnouncement),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Update the state with the modified announcement
+        setAnnouncements(
+          announcements.map((a) =>
+            a._id === announcementId ? { ...a, ...data } : a
+          )
+        );
+
+        // Clear the form data
+        setFormData({
+          title: "",
+          description: "",
+          picture: "",
+        });
+      })
+      .catch((error) => {
+        console.error("Error updating announcement:", error);
+      });
+  };
 
   const handleFileChange = (image) => {
     setIsUploading(true);
@@ -179,9 +242,8 @@ function Announcement() {
               type="text"
               name="title"
               value={formData.title}
-              // Add state and event handlers here
-              className="announcement-form-input"
               onChange={handleChange}
+              className="announcement-form-input"
               required
             />
           </label>
@@ -190,10 +252,9 @@ function Announcement() {
             Description:
             <textarea
               name="description"
-              // Add state and event handlers here
-              className="announcement-form-textarea"
               value={formData.description}
               onChange={handleChange}
+              className="announcement-form-textarea"
               required
             />
           </label>
@@ -204,7 +265,6 @@ function Announcement() {
               type="file"
               name="picture"
               onChange={(e) => handleFileChange(e.target.files[0])}
-              // Add state and event handlers here
               className="announcement-form-input"
               placeholder="Upload a picture"
             />
@@ -221,6 +281,22 @@ function Announcement() {
         ) : (
           announcements.map((announcement) => (
             <div key={announcement._id} className="announcement-card">
+              {isAdmin && (
+                <div className="announcement-change-maker-button">
+                  <button
+                    onClick={() => handleDelete(announcement._id)}
+                    className="announcement-delete-button"
+                  >
+                    Delete
+                  </button>
+                  <button
+                    onClick={() => handleUpdate(announcement._id)}
+                    className="announcement-update-button"
+                  >
+                    Update
+                  </button>
+                </div>
+              )}
               <div className="announcemnt-1-1-container">
                 <div className="announcemnt-1-container">
                   <img
@@ -255,8 +331,8 @@ function Announcement() {
                 />
                 <FaRegCommentDots
                   style={
-                    currentCommentingAnnouncemnt == "" ||
-                    currentCommentingAnnouncemnt != announcement._id
+                    currentCommentingAnnouncemnt === "" ||
+                    currentCommentingAnnouncemnt !== announcement._id
                       ? { position: "absolute" }
                       : { position: "static" }
                   }
@@ -264,7 +340,7 @@ function Announcement() {
                   className="announcement-comment-button"
                 />
               </div>
-              {currentCommentingAnnouncemnt == announcement._id && (
+              {currentCommentingAnnouncemnt === announcement._id && (
                 <CommentSection announcementId={announcement._id} />
               )}
             </div>

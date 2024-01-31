@@ -45,5 +45,43 @@ const fetchJobAndInternship = async (req, res) => {
   }
 };
 
+const deleteJobAndInternship = async (req, res) => {
+  if (!req.user.isAdmin)
+    return res
+      .status(403)
+      .json({ message: "You are not allowed to delete jobs and internships" });
+  try {
+    const deletedJobOrInternship = await JobsAndInternships.findByIdAndDelete(
+      req.params.id
+    );
+    res.status(200).json({ message: "Job or internship deleted" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+const updateJobAndInternship = async (req, res) => {
+  if (!req.user.isAdmin)
+    return res
+      .status(403)
+      .json({ message: "You are not allowed to update jobs and internships" });
+  try {
+    const updatedJobOrInternship = await JobsAndInternships.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: req.body,
+      },
+      { new: true }
+    );
+    res.status(200).json(updatedJobOrInternship);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 module.exports.postJobAndInternship = postJobAndInternship;
 module.exports.fetchJobAndInternship = fetchJobAndInternship;
+module.exports.deleteJobAndInternship = deleteJobAndInternship;
+module.exports.updateJobAndInternship = updateJobAndInternship;

@@ -14,6 +14,7 @@ function LostAndFound() {
   const [isLoaded, setIsLoaded] = useState(true);
   const [profilePicture, setProfilePicture] = React.useState("");
   const [isUploading, setIsUploading] = React.useState(false);
+  const [currentEditingItem, setCurrentEditingItem] = useState("");
 
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("userData"));
@@ -107,6 +108,64 @@ function LostAndFound() {
       });
   };
 
+  const handleDelete = (id) => {
+    fetch(`http://localhost:5011/api/lostAndFound/delete/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("userData")) &&
+          JSON.parse(localStorage.getItem("userData")).token
+        }`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+        setLostAndFoundItems((prevData) =>
+          prevData.filter((item) => item._id !== id)
+        );
+      })
+      .catch((error) => {
+        console.error("Error deleting lost and found item:", error);
+      });
+  };
+
+  const handleUpdate = (id) => {
+    const updatedItem = {
+      title: formData.title,
+      description: formData.description,
+      picture: profilePicture,
+    };
+
+    fetch(`http://localhost:5011/api/lostAndFound/update/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("userData")) &&
+          JSON.parse(localStorage.getItem("userData")).token
+        }`,
+      },
+      body: JSON.stringify(updatedItem),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setLostAndFoundItems(
+          lostAndFoundItems.map((item) =>
+            item._id === id ? { ...item, ...data } : item
+          )
+        );
+        setFormData({
+          title: "",
+          description: "",
+        });
+        setCurrentEditingItem("");
+      })
+      .catch((error) => {
+        console.error("Error updating lost and found item:", error);
+      });
+  };
+
   return (
     <div className="lostandfound-page">
       <div className="lostandfound-admin">
@@ -158,6 +217,22 @@ function LostAndFound() {
           lostAndFoundItems &&
           lostAndFoundItems.map((item) => (
             <div key={item._id} className="lostandfound-card">
+              {isAdmin && (
+                <div className="lostandfound-change-maker-button">
+                  <button
+                    onClick={() => handleUpdate(item._id)}
+                    className="lostandfound-update-button"
+                  >
+                    Update
+                  </button>
+                  <button
+                    onClick={() => handleDelete(item._id)}
+                    className="lostandfound-delete-button"
+                  >
+                    Delete
+                  </button>
+                </div>
+              )}
               <div className="lostandfound-card-header">
                 <h2 className="lostandfound-card-title">{item.title}</h2>
                 <p className="lostandfound-card-date">

@@ -162,3 +162,33 @@
         box-shadow: 0 0 0 0 rgba(58, 123, 186, 0.7);
     }
 }
+
+
+
+/* Add these styles at the end of JobsAndInternships.css */
+
+.jobsandinternships-change-maker-button {
+    display: flex;
+    gap: 5px;
+}
+
+.jobsandinternships-edit-button,
+.jobsandinternships-update-button,
+.jobsandinternships-delete-button {
+    padding: 8px;
+    cursor: pointer;
+    background-color: #4caf50;
+    /* Green color for edit and update buttons */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+}
+
+.jobsandinternships-delete-button {
+    background-color: #f44336;
+    /* Red color for delete button */
+}
+
+.jobsandinternships-change-maker-button{
+    margin-top: 10px;
+}

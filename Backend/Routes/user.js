@@ -8,10 +8,12 @@ const {
   fetchComments,
   fetchUser,
   likeAnnouncement,
+  editProfile,
 } = require("../Controllers/userController");
 
 router.post("/login", loginUser);
 router.post("/register", registerUser);
+router.route("/editProfile").put(authGuard, editProfile);
 router.route("/likes").get(authGuard, fetchLikes);
 router.route("/comments").get(authGuard, fetchComments);
 router.route("/:userId").get(authGuard, fetchUser);
