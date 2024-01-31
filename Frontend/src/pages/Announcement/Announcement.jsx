@@ -173,10 +173,16 @@ function Announcement() {
 
   const handleUpdate = (announcementId) => {
     // Update announcement
-    const updatedAnnouncement = {
-      title: formData.title,
-      description: formData.description,
-      picture: profilePicture,
+    if (!formData.title && !formData.description && !profilePicture) {
+      alert("Please fill in at least one field.");
+      return;
+    }
+
+    const dataToBeSent = {
+      title: formData.title !== "" ? formData.title : undefined,
+      description:
+        formData.description !== "" ? formData.description : undefined,
+      picture: profilePicture !== "" ? profilePicture : undefined,
     };
 
     fetch(`http://localhost:5011/api/announcement/update/${announcementId}`, {
@@ -188,7 +194,7 @@ function Announcement() {
           JSON.parse(localStorage.getItem("userData")).token
         }`,
       },
-      body: JSON.stringify(updatedAnnouncement),
+      body: JSON.stringify(dataToBeSent),
     })
       .then((response) => response.json())
       .then((data) => {
@@ -203,8 +209,8 @@ function Announcement() {
         setFormData({
           title: "",
           description: "",
-          picture: "",
         });
+        setProfilePicture("");
       })
       .catch((error) => {
         console.error("Error updating announcement:", error);
@@ -290,7 +296,9 @@ function Announcement() {
                     Delete
                   </button>
                   <button
-                    onClick={() => handleUpdate(announcement._id)}
+                    onClick={() => {
+                      handleUpdate(announcement._id);
+                    }}
                     className="announcement-update-button"
                   >
                     Update

@@ -145,13 +145,24 @@ function JobsAndInternships() {
   };
 
   const handleUpdate = (id) => {
+    if (
+      !formData.title &&
+      !formData.company &&
+      !formData.link &&
+      !formData.deadline &&
+      !profilePicture
+    ) {
+      alert("please fill at least one data");
+      return;
+    }
     const updatedJob = {
-      title: formData.title,
-      company: formData.company,
-      link: formData.link,
-      description: formData.description,
-      deadline: formData.deadline,
-      picture: profilePicture,
+      title: formData.title !== "" ? formData.title : undefined,
+      company: formData.company !== "" ? formData.company : undefined,
+      link: formData.link !== "" ? formData.link : undefined,
+      description:
+        formData.description !== "" ? formData.description : undefined,
+      deadline: formData.deadline !== "" ? formData.deadline : undefined,
+      picture: profilePicture !== "" ? profilePicture : undefined,
     };
 
     fetch(`http://localhost:5011/api/jobsAndInternships/update/${id}`, {
@@ -179,6 +190,7 @@ function JobsAndInternships() {
           description: "",
           deadline: "",
         });
+        setProfilePicture("");
         setCurrentEditingJob("");
       })
       .catch((error) => {
@@ -288,7 +300,9 @@ function JobsAndInternships() {
               {isAdmin && (
                 <div className="jobsandinternships-change-maker-button">
                   <button
-                    onClick={() => handleUpdate(jobOrInternship._id)}
+                    onClick={() => {
+                      handleUpdate(jobOrInternship._id);
+                    }}
                     className="jobsandinternships-update-button"
                   >
                     Update

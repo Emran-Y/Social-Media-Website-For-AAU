@@ -132,9 +132,10 @@ function LostAndFound() {
 
   const handleUpdate = (id) => {
     const updatedItem = {
-      title: formData.title,
-      description: formData.description,
-      picture: profilePicture,
+      title: formData.title !== "" ? formData.title : undefined,
+      description:
+        formData.description !== "" ? formData.description : undefined,
+      picture: profilePicture !== "" ? profilePicture : undefined,
     };
 
     fetch(`http://localhost:5011/api/lostAndFound/update/${id}`, {
