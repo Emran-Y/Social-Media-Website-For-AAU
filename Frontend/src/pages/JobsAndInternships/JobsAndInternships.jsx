@@ -155,14 +155,15 @@ function JobsAndInternships() {
       alert("please fill at least one data");
       return;
     }
+
+    console.log("Form data submitted:", formData);
     const updatedJob = {
-      title: formData.title !== "" ? formData.title : undefined,
-      company: formData.company !== "" ? formData.company : undefined,
-      link: formData.link !== "" ? formData.link : undefined,
-      description:
-        formData.description !== "" ? formData.description : undefined,
-      deadline: formData.deadline !== "" ? formData.deadline : undefined,
-      picture: profilePicture !== "" ? profilePicture : undefined,
+      title: formData.title ? formData.title : undefined,
+      company: formData.company ? formData.company : undefined,
+      link: formData.link ? formData.link : undefined,
+      description: formData.description ? formData.description : undefined,
+      deadline: formData.deadline ? formData.deadline : undefined,
+      picture: profilePicture ? profilePicture : undefined,
     };
 
     fetch(`http://localhost:5011/api/jobsAndInternships/update/${id}`, {
@@ -281,6 +282,15 @@ function JobsAndInternships() {
       <div className="jobsandinternships-posts">
         {isLoaded ? (
           <div className="nice-spinner"></div>
+        ) : jobsAndInternships.length === 0 ? (
+          <div className="clubadminpendings-card">
+            <p
+              style={{ textAlign: "center" }}
+              className="clubadminpendings-username"
+            >
+              No jobs or internships
+            </p>
+          </div>
         ) : (
           jobsAndInternships.map((jobOrInternship) => (
             <div key={jobOrInternship._id} className="jobsandinternships-card">

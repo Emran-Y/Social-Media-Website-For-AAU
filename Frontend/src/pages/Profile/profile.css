@@ -104,6 +104,7 @@
 .profile-2-2-feed{
     display: flex;
     flex-direction: column;
+    color: #ccc;
   
 }
 

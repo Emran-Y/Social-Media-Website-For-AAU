@@ -1,8 +1,9 @@
 import React from "react";
 import "./header.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function Header() {
+  const location = useLocation();
   const [activeNav, setActiveNav] = React.useState("header-navigation");
   const [userData, setUserData] = React.useState({});
   React.useEffect(() => {
@@ -50,30 +51,92 @@ function Header() {
             <ul className="nav-menus">
               {userData.clubAdmin ? (
                 <li onClick={navToggler}>
-                  <Link to="clubs">Pendings</Link>
+                  <Link
+                    style={{
+                      textDecoration:
+                        location.pathname === "/clubs" ? "underline" : "none",
+                    }}
+                    to="clubs"
+                  >
+                    Pendings
+                  </Link>
                 </li>
               ) : (
                 <li onClick={navToggler}>
-                  <Link to="clubs">Clubs</Link>
+                  <Link
+                    style={{
+                      textDecoration:
+                        location.pathname === "/clubs" ? "underline" : "none",
+                    }}
+                    to="clubs"
+                  >
+                    Clubs
+                  </Link>
                 </li>
               )}
               {userData.clubAdmin ? (
                 <li onClick={navToggler}>
-                  <Link to="myclubs">My Club</Link>
+                  <Link
+                    style={{
+                      textDecoration:
+                        location.pathname === "/myclubs" ? "underline" : "none",
+                    }}
+                    to="myclubs"
+                  >
+                    My Club
+                  </Link>
                 </li>
               ) : (
                 <li onClick={navToggler}>
-                  <Link to="myclubs">My Clubs</Link>
+                  <Link
+                    style={{
+                      textDecoration:
+                        location.pathname === "/myclubs" ? "underline" : "none",
+                    }}
+                    to="myclubs"
+                  >
+                    My Clubs
+                  </Link>
                 </li>
               )}
               <li onClick={navToggler}>
-                <Link to="lostAndFound">Lost and Found</Link>
+                <Link
+                  style={{
+                    textDecoration:
+                      location.pathname === "/lostAndFound"
+                        ? "underline"
+                        : "none",
+                  }}
+                  to="lostAndFound"
+                >
+                  Lost and Found
+                </Link>
               </li>
               <li onClick={navToggler}>
-                <Link to="jobsandinternships">Jobs and Internships</Link>
+                <Link
+                  style={{
+                    textDecoration:
+                      location.pathname === "/jobsandinternships"
+                        ? "underline"
+                        : "none",
+                  }}
+                  to="jobsandinternships"
+                >
+                  Jobs and Internships
+                </Link>
               </li>
               <li onClick={navToggler}>
-                <Link to="announcement">Announcement</Link>
+                <Link
+                  style={{
+                    textDecoration:
+                      location.pathname === "/announcement"
+                        ? "underline"
+                        : "none",
+                  }}
+                  to="announcement"
+                >
+                  Announcement
+                </Link>
               </li>
             </ul>
           )}

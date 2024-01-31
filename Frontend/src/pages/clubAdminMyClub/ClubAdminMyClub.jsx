@@ -177,7 +177,12 @@ function ClubAdminMyClub() {
         {clickedChat ? (
           <div className="component-wrapper">
             <div className="usermyown-chatting-container-right-header">
-              <h2>{clickedChat.clubName}</h2>
+              <h2
+                className="club-club-title-chat"
+                onClick={() => setClickedChat(null)}
+              >
+                {clickedChat.clubName}
+              </h2>
             </div>
             <div className="usermyown-chatting-container-right-below">
               <div className="usermyown-chatting-container-right-main">
@@ -191,7 +196,7 @@ function ClubAdminMyClub() {
                           key={msg._id}
                           userId={msg.sender._id}
                           content={msg.content}
-                          name={msg.sender.fullName}
+                          name={msg.sender.username}
                           pic={msg.sender.profilePicture}
                           time={format(msg.createdAt)}
                         />

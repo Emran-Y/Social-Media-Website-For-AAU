@@ -22,6 +22,10 @@ function UserMyOwnClub() {
   }, [clickedChat]);
 
   React.useEffect(() => {
+    console.log(JSON.parse(localStorage.getItem("userData")).userId);
+  }, [clickedChat]);
+
+  React.useEffect(() => {
     console.log("called");
 
     const handleResize = () => {
@@ -69,7 +73,6 @@ function UserMyOwnClub() {
       })
       .then((data) => {
         setLodded(true);
-        console.log(data);
         setMyClubs(data);
       })
       .catch((error) => {
@@ -116,6 +119,8 @@ function UserMyOwnClub() {
     });
   }, [socket]);
   const handleClubCardClicked = (club) => {
+    console.log(club);
+    console.log(JSON.parse(localStorage.getItem("userData")).userId);
     setClickedChat(club);
     fetch(`http://localhost:5011/api/message/fetchAllMessages/${club._id}`, {
       method: "GET",
@@ -127,7 +132,10 @@ function UserMyOwnClub() {
       },
     })
       .then((response) => response.json())
-      .then((data) => setMessages(data))
+      .then((data) => {
+        console.log(data);
+        setMessages(data);
+      })
       .catch((error) => {
         console.error("Fetch error:", error);
         // Handle the error as needed
@@ -148,26 +156,37 @@ function UserMyOwnClub() {
         </div>
         <div className="usermyown-chatting-container-left-main">
           {lodded ? (
-            myClubs.map((club) => {
-              return (
-                <div
-                  onClick={() => {
-                    handleClubCardClicked(club);
-                    setRoom(club._id);
-                  }}
-                  className="usermyown-chatting-container-left-main-card"
+            myClubs.length == 0 ? (
+              <div className="clubadminpendings-card">
+                <p
+                  style={{ textAlign: "center" }}
+                  className="clubadminpendings-username"
                 >
-                  <h2 className="usermyown-chatting-container-left-main-card-title">
-                    {club.clubName}
-                  </h2>
-                  <p className="usermyown-chatting-container-left-main-card-message">
-                    {" "}
-                    <strong>{club.clubName}</strong>:{" "}
-                    {club.latestMessage && club.latestMessage.message}
-                  </p>
-                </div>
-              );
-            })
+                  No Clubs
+                </p>
+              </div>
+            ) : (
+              myClubs.map((club) => {
+                return (
+                  <div
+                    onClick={() => {
+                      handleClubCardClicked(club);
+                      setRoom(club._id);
+                    }}
+                    className="usermyown-chatting-container-left-main-card"
+                  >
+                    <h2 className="usermyown-chatting-container-left-main-card-title">
+                      {club.clubName}
+                    </h2>
+                    <p className="usermyown-chatting-container-left-main-card-message">
+                      {" "}
+                      <strong>{club.clubName}</strong>:{" "}
+                      {club.latestMessage && club.latestMessage.message}
+                    </p>
+                  </div>
+                );
+              })
+            )
           ) : (
             <div className="nice-spinner"></div>
           )}
@@ -181,7 +200,10 @@ function UserMyOwnClub() {
         {clickedChat ? (
           <div className="component-wrapper">
             <div className="usermyown-chatting-container-right-header">
-              <h2 onClick={() => setClickedChat(null)}>
+              <h2
+                className="club-club-title-chat-user"
+                onClick={() => setClickedChat(null)}
+              >
                 {clickedChat.clubName}
               </h2>
             </div>
@@ -197,7 +219,7 @@ function UserMyOwnClub() {
                           key={msg._id}
                           userId={msg.sender._id}
                           content={msg.content}
-                          name={msg.sender.fullName}
+                          name={msg.sender.username}
                           pic={msg.sender.profilePicture}
                           time={format(msg.createdAt)}
                         />

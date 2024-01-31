@@ -9,6 +9,10 @@ const AAUDB = [
   { studentId: "UGR/1649/19", password: "uvwx" },
   { studentId: "UGR/1649/20", password: "yz12" },
   { studentId: "UGR/1649/21", password: "3456" },
+  { studentId: "UGR/1649/22", password: "3456" },
+  { studentId: "UGR/1649/23", password: "3456" },
+  { studentId: "UGR/1649/24", password: "3456" },
+  { studentId: "UGR/1649/25", password: "3456" },
 ];
 
 module.exports = AAUDB; // Export the array to be used in other files

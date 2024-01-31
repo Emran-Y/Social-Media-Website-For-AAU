@@ -6,6 +6,7 @@ const {
   fetchAllAnnouncement,
   deleteAnnouncement,
   updateAnnouncement,
+  fetchAnnouncement,
 } = require("../Controllers/announcementController");
 const authGuard = require("../Middlewares/authGuard");
 
@@ -14,5 +15,6 @@ router.route("/post").post(authGuard, postAnnouncement);
 router.route("/allcomments/:announcementId").get(authGuard, fetchAllComments);
 router.route("/delete/:announcementId").delete(authGuard, deleteAnnouncement);
 router.route("/update/:announcementId").put(authGuard, updateAnnouncement);
+router.route("/get/:announcementId").get(authGuard, fetchAnnouncement);
 
 module.exports = router;

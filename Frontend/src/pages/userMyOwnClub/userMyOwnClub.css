@@ -218,4 +218,14 @@
     display: none;
 }
 
+.club-club-title-chat-user {
+    cursor: pointer;
+
+    /* Making text unselectable and uncopyable */
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
 

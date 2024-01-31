@@ -117,8 +117,28 @@ const updateAnnouncement = async (req, res) => {
   }
 };
 
+const fetchAnnouncement = async (req, res) => {
+  if (
+    typeof req.params.announcementId !== "string" ||
+    req.params.announcementId.length !== 24
+  ) {
+    return res.status(400).json({ message: "Invalid announcement id" });
+  }
+
+  try {
+    const announcement = await Announcement.findById(req.params.announcementId);
+    if (!announcement)
+      return res.status(404).json({ message: "Announcement not found" });
+    res.status(200).json(announcement);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 module.exports.postAnnouncement = postAnnouncement;
 module.exports.fetchAllComments = fetchAllComments;
 module.exports.fetchAllAnnouncement = fetchAllAnnouncement;
 module.exports.deleteAnnouncement = deleteAnnouncement;
 module.exports.updateAnnouncement = updateAnnouncement;
+module.exports.fetchAnnouncement = fetchAnnouncement;

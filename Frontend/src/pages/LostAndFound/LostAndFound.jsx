@@ -214,6 +214,15 @@ function LostAndFound() {
       <div className="lostandfound-items">
         {isLoaded ? (
           <div className="nice-spinner"></div>
+        ) : lostAndFoundItems.length === 0 ? (
+          <div className="clubadminpendings-card">
+            <p
+              style={{ textAlign: "center" }}
+              className="clubadminpendings-username"
+            >
+              No lost and found items found
+            </p>
+          </div>
         ) : (
           lostAndFoundItems &&
           lostAndFoundItems.map((item) => (

@@ -22,7 +22,7 @@ const fetchAllMessages = async (req, res) => {
   try {
     const messages = await Message.find({ clubId: req.params.id })
       .sort({ updatedAt: 1 })
-      .populate("sender", "fullName profilePicture _id")
+      .populate("sender", "fullName profilePicture _id username")
       .populate("clubId", "clubName _id admin");
     return res.status(200).json(messages);
   } catch (err) {

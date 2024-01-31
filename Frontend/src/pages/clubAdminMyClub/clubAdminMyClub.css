@@ -220,3 +220,14 @@
 .isRemoved {
     display: none;
 }
+
+/* Styling for elements with class 'club-club-title-chat' */
+.club-club-title-chat {
+    cursor: pointer;
+
+    /* Making text unselectable and uncopyable */
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}

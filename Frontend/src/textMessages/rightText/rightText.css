@@ -29,7 +29,12 @@
 }
 
 .name-u {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 500;
     margin-bottom: 5px;
+    font-weight: 300;
+}
+
+.left-text{
+    font-size: 15px;
 }

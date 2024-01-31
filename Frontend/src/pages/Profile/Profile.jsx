@@ -1,6 +1,6 @@
 import React from "react";
 import "./Profile.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { format } from "timeago.js";
 import { MdEdit } from "react-icons/md";
 
@@ -135,9 +135,11 @@ function Profile() {
         }`,
       },
       body: JSON.stringify({
-        fullName: editedName,
-        fieldOfStudy: editedFieldOfStudy,
-        profilePicture: editedImage,
+        fullName: editedName ? editedName : userData.fullName,
+        fieldOfStudy: editedFieldOfStudy
+          ? editedFieldOfStudy
+          : userData.fieldOfStudy,
+        profilePicture: editedImage ? editedImage : userData.profilePicture,
       }),
     })
       .then((response) => {
@@ -314,7 +316,16 @@ function Profile() {
               ? comments &&
                 comments.map((comment) => {
                   return (
-                    <div className="profile-2-2-feed-card" key={comment.id}>
+                    <Link
+                      to={`/announcement/${comment.announcementId._id}`}
+                      style={{
+                        cursor: "pointer",
+                        textDecoration: "none",
+                        color: "black",
+                      }}
+                      className="profile-2-2-feed-card"
+                      key={comment.id}
+                    >
                       <p>
                         <span className="profile-2-2-commenter">
                           {userData && userData.fullName}
@@ -322,13 +333,22 @@ function Profile() {
                         commented on a post - {format(comment.updatedAt)}
                       </p>
                       <p className="profile-2-2-comment">{comment.content}</p>
-                    </div>
+                    </Link>
                   );
                 })
               : likes &&
                 likes.map((like) => {
                   return (
-                    <div className="profile-2-2-feed-card" key={like.id}>
+                    <Link
+                      to={`/announcement/${like._id}`}
+                      style={{
+                        cursor: "pointer",
+                        textDecoration: "none",
+                        color: "black",
+                      }}
+                      className="profile-2-2-feed-card"
+                      key={like.id}
+                    >
                       <p>
                         <span className="profile-2-2-commenter">
                           {userData && userData.fullName}
@@ -336,7 +356,7 @@ function Profile() {
                         liked on a post - {format(like.updatedAt)}
                       </p>
                       <p className="profile-2-2-comment">{like.title}</p>
-                    </div>
+                    </Link>
                   );
                 })}
           </div>

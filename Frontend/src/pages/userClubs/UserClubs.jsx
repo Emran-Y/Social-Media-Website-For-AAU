@@ -83,20 +83,34 @@ function UserClubs() {
   return (
     <div className="availableClubs-container">
       {lodded ? (
-        availableClubs.map((club) => (
-          <div key={club._id} className="availableClubs-card">
-            <h3 className="availableClubs-clubName">{club.clubName}</h3>
-            <button
-              className={`availableClubs-applyButton ${
-                sentJoinRequests.includes(club._id) ? "pending" : ""
-              }`}
-              onClick={() => handleApply(club._id)}
-              disabled={sentJoinRequests.includes(club._id)}
+        availableClubs.length === 0 ? (
+          <div
+            style={{ marginLeft: "auto", marginRight: "auto" }}
+            className="clubadminpendings-card"
+          >
+            <p
+              style={{ textAlign: "center" }}
+              className="clubadminpendings-username"
             >
-              {sentJoinRequests.includes(club._id) ? "Pending" : "Apply"}
-            </button>
+              You are already member of all clubs!
+            </p>
           </div>
-        ))
+        ) : (
+          availableClubs.map((club) => (
+            <div key={club._id} className="availableClubs-card">
+              <h3 className="availableClubs-clubName">{club.clubName}</h3>
+              <button
+                className={`availableClubs-applyButton ${
+                  sentJoinRequests.includes(club._id) ? "pending" : ""
+                }`}
+                onClick={() => handleApply(club._id)}
+                disabled={sentJoinRequests.includes(club._id)}
+              >
+                {sentJoinRequests.includes(club._id) ? "Pending" : "Apply"}
+              </button>
+            </div>
+          ))
+        )
       ) : (
         <div className="nice-spinner"></div>
       )}

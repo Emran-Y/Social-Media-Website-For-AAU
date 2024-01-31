@@ -12,6 +12,7 @@ import NotFound from "./pages/NotFound/NotFound";
 import MyClubs from "./ConditionalPages/MyClubs";
 import Clubs from "./ConditionalPages/clubs";
 import Home from "./pages/home/home"; // Import your Home component
+import OneAnnouncement from "./pages/oneAnnouncement/OneAnnouncement";
 
 function App() {
   return (
@@ -24,6 +25,10 @@ function App() {
             <Route index element={<Home />} />{" "}
             {/* Display Home component for exact path */}
             <Route path="/announcement" element={<Announcement />} />
+            <Route
+              path="/announcement/:announcementId"
+              element={<OneAnnouncement />}
+            />
             <Route
               path="/jobsAndInternships"
               element={<JobsAndInternships />}
