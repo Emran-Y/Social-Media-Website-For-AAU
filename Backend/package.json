@@ -10,8 +10,13 @@
     "mongoose": "^8.1.0",
     "nodemon": "^3.0.3",
     "socket.io": "^4.7.4"
+    
   },
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
   }
 }
