@@ -17,7 +17,6 @@
   - [Backend](#backend)
   - [Frontend](#frontend)
 - [Contributing](#contributing)
-- [License](#license)
 - [Screenshots](#screenshots)
 
 ## Introduction
@@ -114,11 +113,7 @@ The absence of a centralized information hub has led to communication gaps, hind
 
 ## Contributing
 
-We welcome contributions from the community. If you'd like to contribute, please follow our [contribution guidelines](CONTRIBUTING.md).
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
+We welcome contributions from the community. If you'd like to contribute.
 
 ## Screenshots
 
