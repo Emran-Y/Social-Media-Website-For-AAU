@@ -70,6 +70,13 @@ const userSchema = new mongoose.Schema(
 
 const User = mongoose.model("User", userSchema);
 
+userSchema.statics.updateLikes = async function (announcementId) {
+  return this.updateMany(
+    { "activities.likes": { $in: [announcementId] } },
+    { $pull: { "activities.likes": announcementId } }
+  );
+};
+
 function userValidator(user) {
   const schema = Joi.object({
     universityId: Joi.string().required(),
@@ -84,5 +91,5 @@ function userValidator(user) {
   return schema.validate(user);
 }
 
-exports.userValidator = userValidator;
-exports.User = User;
+module.exports.userValidator = userValidator;
+module.exports.User = User;

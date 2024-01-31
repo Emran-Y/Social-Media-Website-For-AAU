@@ -1,5 +1,6 @@
 const Announcement = require("../Models/announcement");
 const Comment = require("../Models/comment");
+const { User } = require("../Models/user");
 
 const postAnnouncement = async (req, res) => {
   if (!req.user.isAdmin)
@@ -55,15 +56,32 @@ const deleteAnnouncement = async (req, res) => {
     return res
       .status(403)
       .json({ message: "You are not allowed to delete announcements" });
+
   try {
+    // Delete the announcement
     const deletedAnnouncement = await Announcement.findByIdAndDelete(
       req.params.announcementId
     );
+
     if (!deletedAnnouncement)
       return res.status(404).json({ message: "Announcement not found" });
-    return res.status(200).json({ message: "Announcement deleted" });
+
+    // Update users who liked the announcement using $in
+    // await User.updateLikes(req.params.announcementId);
+
+    await User.updateMany(
+      { "activities.likes": { $in: [req.params.announcementId] } },
+      { $pull: { "activities.likes": req.params.announcementId } }
+    );
+
+    // // Remove comments associated with the announcement
+    await Comment.deleteMany({ announcementId: req.params.announcementId });
+
+    return res
+      .status(200)
+      .json({ message: "Announcement and associated data deleted" });
   } catch (err) {
-    console.log(err);
+    console.error(err);
     return res.status(500).json({ message: "Internal server error" });
   }
 };
