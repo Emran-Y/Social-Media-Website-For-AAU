@@ -3,7 +3,7 @@
 ## Contributors
 
 - Moti Leggese
-- Meti
+- Meti Lemessa
 - Emran Yonas
 
 ## Table of Contents
