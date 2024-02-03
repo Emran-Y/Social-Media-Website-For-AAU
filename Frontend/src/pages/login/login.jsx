@@ -30,7 +30,7 @@ function Login() {
     setPassword("");
     setShowError(false);
     let status;
-    fetch("http://localhost:5011/api/user/login", {
+    fetch("https://social-media-pxvu.onrender.com/api/user/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

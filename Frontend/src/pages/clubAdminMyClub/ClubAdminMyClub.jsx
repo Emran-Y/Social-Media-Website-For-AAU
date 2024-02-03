@@ -128,7 +128,10 @@ function ClubAdminMyClub() {
       },
     })
       .then((response) => response.json())
-      .then((data) => setMessages(data))
+      .then((data) => {
+        console.log(data);
+        setMessages(data);
+      })
       .catch((error) => {
         console.error("Fetch error:", error);
         // Handle the error as needed
