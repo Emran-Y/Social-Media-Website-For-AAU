@@ -13,7 +13,13 @@ const messageRoute = require("./Routes/message");
 const http = require("http");
 const { Server } = require("socket.io");
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "*", // Allow requests from any origin during development
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 dotenv.config();
 app.use(express.json());
 
