@@ -15,7 +15,7 @@ const { Server } = require("socket.io");
 
 app.use(
   cors({
-    origin: "*", // Allow requests from any origin during development
+    origin: "https://social-media-pxvu.onrender.com/", // Allow requests from any origin during development
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
