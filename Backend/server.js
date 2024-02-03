@@ -23,6 +23,8 @@ app.use(
 dotenv.config();
 app.use(express.json());
 
+const PORT = process.env.PORT || 5011;
+
 mongoose
   .connect(process.env.MONGO_URL)
   .then(() => {
@@ -48,7 +50,7 @@ mongoose
       });
     });
 
-    server.listen(5011, () => {
+    server.listen(PORT, () => {
       console.log("Server is running on port 5011.");
     });
   })
