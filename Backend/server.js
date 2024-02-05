@@ -20,13 +20,15 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
-dotenv.config();
+
 app.use(express.json());
 
 const PORT = process.env.PORT || 5011;
 
 mongoose
-  .connect(process.env.MONGO_URL)
+  .connect(
+    "mongodb+srv://EmranEmran:EmranEmran@cluster0.cnl6auj.mongodb.net/AAU-Connectify?retryWrites=true&w=majority"
+  )
   .then(() => {
     console.log("Connected to MongoDB");
 

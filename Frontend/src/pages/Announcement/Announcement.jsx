@@ -11,6 +11,7 @@ import {
 } from "react-icons/fa";
 import CommentSection from "../Comment/Comment";
 import { useNavigate } from "react-router-dom";
+import backend_url from "../../backend.js";
 
 function Announcement() {
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ function Announcement() {
     useState("");
 
   React.useEffect(() => {
-    fetch("http://localhost:5011/api/user/likes", {
+    fetch(`${backend_url}/api/user/likes`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${
@@ -62,7 +63,7 @@ function Announcement() {
     }
 
     // Post announcement
-    fetch("http://localhost:5011/api/announcement/post", {
+    fetch(`${backend_url}/api/announcement/post`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -97,7 +98,7 @@ function Announcement() {
 
   useEffect(() => {
     // Fetch announcements
-    fetch("http://localhost:5011/api/announcement", {
+    fetch(`${backend_url}/api/announcement`, {
       headers: {
         Authorization: `Bearer ${
           JSON.parse(localStorage.getItem("userData")) &&
@@ -123,7 +124,7 @@ function Announcement() {
   }, []);
 
   const handleLike = (announcementId) => {
-    fetch(`http://localhost:5011/api/user/like/${announcementId}`, {
+    fetch(`${backend_url}/api/user/like/${announcementId}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${
@@ -153,7 +154,7 @@ function Announcement() {
 
   const handleDelete = (announcementId) => {
     // Delete announcement
-    fetch(`http://localhost:5011/api/announcement/delete/${announcementId}`, {
+    fetch(`${backend_url}/api/announcement/delete/${announcementId}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${
@@ -185,7 +186,7 @@ function Announcement() {
       picture: profilePicture !== "" ? profilePicture : undefined,
     };
 
-    fetch(`http://localhost:5011/api/announcement/update/${announcementId}`, {
+    fetch(`${backend_url}/api/announcement/update/${announcementId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

@@ -3,6 +3,7 @@ import "./login.css";
 import { IoPerson } from "react-icons/io5";
 import { PiLockKeyFill } from "react-icons/pi";
 import { useNavigate, Link } from "react-router-dom";
+import backend_url from "../../backend";
 function Login() {
   const navigate = useNavigate();
   React.useEffect(() => {
@@ -30,7 +31,7 @@ function Login() {
     setPassword("");
     setShowError(false);
     let status;
-    fetch("https://social-media-pxvu.onrender.com/api/user/login", {
+    fetch(`${backend_url}/api/user/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

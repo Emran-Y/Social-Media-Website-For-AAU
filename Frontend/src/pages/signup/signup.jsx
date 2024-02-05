@@ -9,6 +9,7 @@ import { FcDepartment } from "react-icons/fc";
 import { FaUniversity } from "react-icons/fa";
 import { MdPassword } from "react-icons/md";
 import { GiEgyptianProfile } from "react-icons/gi";
+import backend_url from "../../backend";
 
 function Signup() {
   const navigate = useNavigate();
@@ -60,7 +61,7 @@ function Signup() {
       profilePicture: profilePicture,
     };
     let status;
-    fetch("http://localhost:5011/api/user/register", {
+    fetch(`${backend_url}/api/user/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

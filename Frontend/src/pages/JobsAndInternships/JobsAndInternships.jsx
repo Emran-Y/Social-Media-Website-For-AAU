@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import "./JobsAndInternships.css";
 import { useNavigate } from "react-router-dom";
 import { format } from "timeago.js";
+import backend_url from "../../backend";
 
 function JobsAndInternships() {
   const [formData, setFormData] = useState({
@@ -31,7 +32,7 @@ function JobsAndInternships() {
       setIsAdmin(userData.isAdmin);
 
       // Fetch jobs and internships
-      fetch("http://localhost:5011/api/jobsAndInternships", {
+      fetch(`${backend_url}/api/jobsAndInternships`, {
         headers: {
           Authorization: `Bearer ${
             JSON.parse(localStorage.getItem("userData")) &&
@@ -73,7 +74,7 @@ function JobsAndInternships() {
 
     // Your code for handling the form submission goes here
     console.log("Form data submitted:", formData);
-    fetch("http://localhost:5011/api/jobsAndInternships/post", {
+    fetch(`${backend_url}/api/jobsAndInternships/post`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -123,7 +124,7 @@ function JobsAndInternships() {
   };
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:5011/api/jobsAndInternships/delete/${id}`, {
+    fetch(`${backend_url}/api/jobsAndInternships/delete/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${
@@ -166,7 +167,7 @@ function JobsAndInternships() {
       picture: profilePicture ? profilePicture : undefined,
     };
 
-    fetch(`http://localhost:5011/api/jobsAndInternships/update/${id}`, {
+    fetch(`${backend_url}/api/jobsAndInternships/update/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
