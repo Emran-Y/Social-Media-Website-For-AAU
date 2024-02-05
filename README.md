@@ -1,12 +1,7 @@
 # AAU Social Media Platform
 
-## Contributors
-
-- Moti Leggese
-- Meti Lemessa
-- Emran Yonas
-
 ## Table of Contents
+
 - [Introduction](#introduction)
 - [Problem Statement](#problem-statement)
 - [Solution](#solution)
@@ -35,21 +30,26 @@ The absence of a centralized information hub has led to communication gaps, hind
 ### Pages
 
 1. **Me Page**
+
    - Logout
    - Edit Profile
    - View Engagement History
 
 2. **Announcements Page**
+
    - View announcements
    - Like and comment on announcements
 
 3. **Jobs and Internships Page**
+
    - Explore job and internship posts
 
 4. **Lost and Found Page**
+
    - View lost and found items
 
 5. **Clubs Page**
+
    - Explore available clubs
    - Apply to join clubs
 
@@ -60,9 +60,11 @@ The absence of a centralized information hub has led to communication gaps, hind
 ### User Roles
 
 1. **Admin**
+
    - Manage announcements, jobs, and lost and found items (create, update, delete)
 
 2. **Club Admin**
+
    - Approve or disapprove user requests to join the club
    - Manage the club group on the website
 
@@ -74,17 +76,21 @@ The absence of a centralized information hub has led to communication gaps, hind
 ## Installation
 
 ### Backend
+
 1. Clone the repository
+
    ```bash
    git clone https://github.com/your-username/aau-social-media-platform.git
    ```
 
 2. Navigate to the backend folder
+
    ```bash
    cd Backend
    ```
 
 3. Install dependencies
+
    ```bash
    npm install
    ```
@@ -95,12 +101,15 @@ The absence of a centralized information hub has led to communication gaps, hind
    ```
 
 ### Frontend
+
 1. Navigate to the frontend folder
+
    ```bash
    cd Frontend
    ```
 
 2. Install dependencies
+
    ```bash
    npm install
    ```
@@ -113,7 +122,3 @@ The absence of a centralized information hub has led to communication gaps, hind
 ## Contributing
 
 We welcome contributions from the community. If you'd like to contribute.
-
-
-
-

@@ -7,6 +7,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@pages": "/src/pages",
+      "@conditionalPage": "/src/conditionalPages",
     },
   },
 });

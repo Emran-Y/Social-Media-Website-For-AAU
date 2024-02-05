@@ -5,7 +5,7 @@ import RightText from "../../textMessages/rightText/RightText";
 import { format } from "timeago.js";
 import io from "socket.io-client";
 
-const socket = io.connect("http://localhost:5011");
+const socket = io.connect("https://social-w41i.onrender.com");
 
 function ClubAdminMyClub() {
   const [myClub, setMyClub] = React.useState();

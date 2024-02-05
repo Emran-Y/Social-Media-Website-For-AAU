@@ -9,8 +9,8 @@ import LostAndFound from "@pages/lostAndFound/LostAndFound";
 import Profile from "@pages/profile/Profile";
 import UserProfile from "@pages/UserProfile/userProfile";
 import NotFound from "@pages/NotFound/NotFound";
-import MyClubs from "./ConditionalPages/MyClubs";
-import Clubs from "./ConditionalPages/clubs";
+import MyClubs from "@conditionalPage/MyClubs";
+import Clubs from "@conditionalPage/clubs";
 import Home from "@pages/home/home"; // Import your Home component
 import OneAnnouncement from "@pages/oneAnnouncement/OneAnnouncement";
 
