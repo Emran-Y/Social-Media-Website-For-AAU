@@ -1,18 +1,18 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/layout";
-import Login from "@pages/login/login";
-import Signup from "@pages/signup/signup";
-import Announcement from "@pages/announcement/Announcement";
-import JobsAndInternships from "@pages/JobsAndInternships/JobsAndInternships";
-import LostAndFound from "@pages/lostAndFound/LostAndFound";
-import Profile from "@pages/profile/Profile";
-import UserProfile from "@pages/UserProfile/userProfile";
-import NotFound from "@pages/NotFound/NotFound";
+import Login from "../src/pages/login/login";
+import Signup from "../src/pages/signup/signup";
+import Announcement from "../src/pages/Announcement/Announcement";
+import JobsAndInternships from "../src/pages/JobsAndInternships/JobsAndInternships";
+import LostAndFound from "../src/pages/lostAndFound/LostAndFound";
+import Profile from "../src/pages/profile/Profile";
+import UserProfile from "../src/pages/UserProfile/userProfile";
+import NotFound from "../src/pages/NotFound/NotFound";
 import MyClubs from "@conditionalPage/MyClubs";
 import Clubs from "@conditionalPage/clubs";
-import Home from "@pages/home/home"; // Import your Home component
-import OneAnnouncement from "@pages/oneAnnouncement/OneAnnouncement";
+import Home from "../src/pages/home/home"; // Import your Home component
+import OneAnnouncement from "../src/pages/oneAnnouncement/OneAnnouncement";
 
 function App() {
   return (
