@@ -4,7 +4,7 @@ import Layout from "./components/layout";
 import Login from "./pages/login/login";
 import Signup from "./pages/signup/signup";
 import Announcement from "./pages/announcement/Announcement";
-import JobsAndInternships from "./pages/jobsAndInternships/JobsAndInternships";
+import JobsAndInternships from "./pages/JobsAndInternships/JobsAndInternships";
 import LostAndFound from "./pages/lostAndFound/LostAndFound";
 import Profile from "./pages/profile/Profile";
 import UserProfile from "./pages/UserProfile/userProfile";
