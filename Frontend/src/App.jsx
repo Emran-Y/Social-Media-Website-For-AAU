@@ -5,12 +5,12 @@ import Login from "@pages/login/login";
 import Signup from "@pages/signup/signup";
 import Announcement from "@pages/Announcement/Announcement";
 import JobsAndInternships from "@pages/JobsAndInternships/JobsAndInternships";
-import LostAndFound from "@pages/lostAndFound/LostAndFound";
-import Profile from "@pages/profile/Profile";
-import UserProfile from "@pages/UserProfile/userProfile";
+import LostAndFound from "@pages/LostAndFound/LostAndFound";
+import Profile from "@pages/Profile/Profile";
+import UserProfile from "@pages/UserProfile/UserProfile";
 import NotFound from "@pages/NotFound/NotFound";
 import MyClubs from "@conditionalPage/MyClubs";
-import Clubs from "@conditionalPage/clubs";
+import Clubs from "@conditionalPage/Clubs";
 import Home from "@pages/home/home"; // Import your Home component
 import OneAnnouncement from "@pages/oneAnnouncement/OneAnnouncement";
 

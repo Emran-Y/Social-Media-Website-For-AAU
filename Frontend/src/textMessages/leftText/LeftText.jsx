@@ -1,5 +1,5 @@
 import React from "react";
-import "./lefttext.css";
+import "./leftText.css";
 import { Link } from "react-router-dom";
 
 function LeftText({ content, name, pic, time, userId }) {

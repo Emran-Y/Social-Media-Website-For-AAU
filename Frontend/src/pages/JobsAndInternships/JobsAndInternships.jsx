@@ -1,7 +1,7 @@
 // JobsAndInternships.js
 
 import React, { useState, useEffect } from "react";
-import "./JobsAndInternships.css";
+import "./jobsAndInternships.css";
 import { useNavigate } from "react-router-dom";
 import { format } from "timeago.js";
 import backend_url from "../../backend";

@@ -6,7 +6,7 @@ import { format } from "timeago.js";
 import io from "socket.io-client";
 import backend_url from "../../backend";
 
-const socket = io.connect(backend_url);
+const socket = io.connect(`${backend_url}`);
 
 function UserMyOwnClub() {
   const [myClubs, setMyClubs] = React.useState([]);

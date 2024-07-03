@@ -1,3 +1,3 @@
-const backend_url = "https://social-w41i.onrender.com";
+const backend_url = "http://localhost:5011";
 
 export default backend_url;

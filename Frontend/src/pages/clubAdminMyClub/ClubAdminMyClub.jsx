@@ -5,7 +5,7 @@ import RightText from "../../textMessages/rightText/RightText";
 import { format } from "timeago.js";
 import io from "socket.io-client";
 import backend_url from "../../backend.js";
-const socket = io.connect(backend_url);
+const socket = io.connect(`${backend_url}`);
 
 function ClubAdminMyClub() {
   const [myClub, setMyClub] = React.useState();

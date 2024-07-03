@@ -16,7 +16,7 @@
   },
   "scripts": {
     "build":"npm i",
-    "start": "node server.js",
+    "start": "nodemon server.js",
     "test":"jest"
   }
 }

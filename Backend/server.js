@@ -13,22 +13,12 @@ const messageRoute = require("./Routes/message");
 const http = require("http");
 const { Server } = require("socket.io");
 
-app.use(
-  cors({
-    origin: "*", // Allow requests from any origin during development
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
-
+app.use(cors());
+dotenv.config();
 app.use(express.json());
 
-const PORT = process.env.PORT || 5011;
-
 mongoose
-  .connect(
-    "mongodb+srv://EmranEmran:EmranEmran@cluster0.cnl6auj.mongodb.net/AAU-Connectify?retryWrites=true&w=majority"
-  )
+  .connect(process.env.MONGO_URL)
   .then(() => {
     console.log("Connected to MongoDB");
 
@@ -52,7 +42,7 @@ mongoose
       });
     });
 
-    server.listen(PORT, () => {
+    server.listen(5011, () => {
       console.log("Server is running on port 5011.");
     });
   })

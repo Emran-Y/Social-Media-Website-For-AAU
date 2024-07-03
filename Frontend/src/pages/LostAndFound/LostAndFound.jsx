@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import "./LostAndFound.css";
+import "./lostAndFound.css";
 import { format } from "timeago.js";
 import backend_url from "../../backend";
 

@@ -1,5 +1,5 @@
 import React from "react";
-import "./Profile.css";
+import "./profile.css";
 import { useNavigate, Link } from "react-router-dom";
 import { format } from "timeago.js";
 import { MdEdit } from "react-icons/md";

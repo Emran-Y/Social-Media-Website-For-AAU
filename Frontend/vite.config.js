@@ -7,7 +7,7 @@ export default {
     alias: {
       "@": "/src",
       "@pages": "/src/pages",
-      "@conditionalPage": "/src/conditionalPages",
+      "@conditionalPage": "/src/ConditionalPages",
       // Add more aliases as needed
     },
   },
