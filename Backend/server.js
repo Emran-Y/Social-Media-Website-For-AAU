@@ -25,8 +25,7 @@ mongoose
     const server = http.createServer(app);
     const io = new Server(server, {
       cors: {
-        origin:
-          "https://social-media-website-for-412lidk1u-emran-ys-projects.vercel.app/",
+        origin: "https://aau-connectify.vercel.app/",
         methods: ["GET", "POST"],
       },
     });
