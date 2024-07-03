@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import "./LostAndFound.css";
 import { format } from "timeago.js";
+import backend_url from "../../backend";
 
 function LostAndFound() {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ function LostAndFound() {
       setIsAdmin(userData.isAdmin);
 
       // Fetch lost and found items
-      fetch("http://localhost:5011/api/lostAndFound", {
+      fetch(`${backend_url}/api/lostAndFound`, {
         headers: {
           Authorization: `Bearer ${
             JSON.parse(localStorage.getItem("userData")) &&
@@ -61,7 +62,7 @@ function LostAndFound() {
 
     // Your code for handling the form submission goes here
     console.log("Form data submitted:", formData);
-    fetch("http://localhost:5011/api/lostAndFound/post", {
+    fetch(`${backend_url}/api/lostAndFound/post`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -109,7 +110,7 @@ function LostAndFound() {
   };
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:5011/api/lostAndFound/delete/${id}`, {
+    fetch(`${backend_url}/api/lostAndFound/delete/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${
@@ -138,7 +139,7 @@ function LostAndFound() {
       picture: profilePicture !== "" ? profilePicture : undefined,
     };
 
-    fetch(`http://localhost:5011/api/lostAndFound/update/${id}`, {
+    fetch(`${backend_url}/api/lostAndFound/update/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

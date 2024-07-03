@@ -2,13 +2,14 @@ import React from "react";
 import "./clubAdminPendings.css";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import backend_url from "../../backend";
 
 function ClubAdminPendings() {
   const [pendings, setPendings] = React.useState([]); // [pending1, pending2, pending3
   const navigate = useNavigate();
 
   const handleAccept = (userId) => {
-    fetch(`http://localhost:5011/api/club/acceptClubJoinRequest/${userId}`, {
+    fetch(`${backend_url}/api/club/acceptClubJoinRequest/${userId}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${
@@ -34,7 +35,7 @@ function ClubAdminPendings() {
   }, []);
 
   React.useEffect(() => {
-    fetch("http://localhost:5011/api/club/fetchAllPendingClubRequests", {
+    fetch(`${backend_url}/api/club/fetchAllPendingClubRequests`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${

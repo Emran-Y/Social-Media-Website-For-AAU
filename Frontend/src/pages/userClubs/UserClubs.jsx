@@ -1,6 +1,7 @@
 import React from "react";
 import "./userClubs.css";
 import { useNavigate } from "react-router-dom";
+import backend_url from "../../backend";
 
 function UserClubs() {
   const navigate = useNavigate();
@@ -9,7 +10,7 @@ function UserClubs() {
   const [lodded, setLodded] = React.useState(false);
 
   React.useEffect(() => {
-    fetch("http://localhost:5011/api/club/pendingClubRequests", {
+    fetch(`${backend_url}/api/club/pendingClubRequests`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${
@@ -33,7 +34,7 @@ function UserClubs() {
         // Handle the error as needed
       });
 
-    fetch("http://localhost:5011/api/club/allClubs", {
+    fetch(`${backend_url}/api/club/allClubs`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${

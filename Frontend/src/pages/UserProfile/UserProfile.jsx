@@ -1,5 +1,6 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import backend_url from "../../backend";
 
 function userProfile() {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ function userProfile() {
   const { userId } = useParams();
   const [thisUserData, setThisUserData] = React.useState({}); // [1
   React.useEffect(() => {
-    fetch(`http://localhost:5011/api/user/${userId}`, {
+    fetch(`${backend_url}/api/user/${userId}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${
