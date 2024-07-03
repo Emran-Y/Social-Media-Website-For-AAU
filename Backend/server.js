@@ -25,7 +25,7 @@ mongoose
     const server = http.createServer(app);
     const io = new Server(server, {
       cors: {
-        origin: "https://aau-connectify.vercel.app/",
+        origin: "https://aau-connectify.vercel.app",
         methods: ["GET", "POST"],
       },
     });
