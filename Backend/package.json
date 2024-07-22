@@ -12,11 +12,17 @@
     "lodash": "^4.17.21",
     "mongoose": "^8.1.0",
     "nodemon": "^3.0.3",
-    "socket.io": "^4.7.4"
+    "socket.io": "^4.7.4",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
   },
   "scripts": {
-    "build":"npm i",
-    "start": "node server.js",
-    "test":"jest"
+    "build": "npm i",
+    "start": "nodemon server.js",
+    "test": "jest",
+    "swagger": "node ./swagger.js"
+  },
+  "devDependencies": {
+    "swagger-autogen": "^2.23.7"
   }
 }

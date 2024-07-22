@@ -6,6 +6,98 @@ const jwt = require("jsonwebtoken");
 const Comment = require("../Models/comment");
 const Announcement = require("../Models/announcement");
 
+/**
+ * @swagger
+ * /api/user/login:
+ *   post:
+ *     summary: Login a user
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *                 description: The user's username
+ *                 example: "john_doe"
+ *               password:
+ *                 type: string
+ *                 description: The user's password
+ *                 example: "password123"
+ *     responses:
+ *       200:
+ *         description: Successful login
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 _id:
+ *                   type: string
+ *                   description: The user's ID
+ *                   example: "60c72b2f5f1b2c001c8e4d9a"
+ *                 token:
+ *                   type: string
+ *                   description: The user's JWT token
+ *                   example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+ *                 isAdmin:
+ *                   type: boolean
+ *                   description: Whether the user is an admin
+ *                   example: false
+ *                 fullName:
+ *                   type: string
+ *                   description: The user's full name
+ *                   example: "John Doe"
+ *                 username:
+ *                   type: string
+ *                   description: The user's username
+ *                   example: "john_doe"
+ *                 clubAdmin:
+ *                   type: boolean
+ *                   description: Whether the user is a club admin
+ *                   example: false
+ *                 activities:
+ *                   type: array
+ *                   description: The user's activities
+ *                   items:
+ *                     type: string
+ *                 fieldOfStudy:
+ *                   type: string
+ *                   description: The user's field of study
+ *                   example: "Computer Science"
+ *                 universityId:
+ *                   type: string
+ *                   description: The user's university ID
+ *                   example: "U12345678"
+ *                 profilePicture:
+ *                   type: string
+ *                   description: The user's profile picture URL
+ *                   example: "https://example.com/profile.jpg"
+ *                 clubMemberships:
+ *                   type: array
+ *                   description: The user's club memberships
+ *                   items:
+ *                     type: string
+ *                 pendingClubRequests:
+ *                   type: array
+ *                   description: The user's pending club requests
+ *                   items:
+ *                     type: string
+ *       400:
+ *         description: Bad request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Error message
+ *                   example: "username or password incorrect"
+ */
+
 const loginUser = async (req, res) => {
   if (!req.body.username || !req.body.password)
     return res

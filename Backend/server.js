@@ -1,8 +1,15 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const app = express();
 const dotenv = require("dotenv");
+const http = require("http");
+const { Server } = require("socket.io");
+const swaggerUi = require("swagger-ui-express");
+const swaggerFile = require("./swagger-output.json");
+const swaggerSpec = require("./swaggerConfig.js");
+
+const app = express();
+
 const userRoute = require("./Routes/user");
 const clubRoute = require("./Routes/club");
 const announcementRoute = require("./Routes/announcement");
@@ -10,32 +17,20 @@ const commentRoute = require("./Routes/comment");
 const jobsAndInternshipsRoute = require("./Routes/jobsAndInternships");
 const lostAndFoundRoute = require("./Routes/lostAndFound");
 const messageRoute = require("./Routes/message");
-const http = require("http");
-const { Server } = require("socket.io");
 
-app.use(
-  cors({
-    origin: "*", // Allow requests from any origin during development
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
-
+app.use(cors());
+dotenv.config();
 app.use(express.json());
 
-const PORT = process.env.PORT || 5011;
-
 mongoose
-  .connect(
-    "mongodb+srv://EmranEmran:EmranEmran@cluster0.cnl6auj.mongodb.net/AAU-Connectify?retryWrites=true&w=majority"
-  )
+  .connect(process.env.MONGO_URL)
   .then(() => {
     console.log("Connected to MongoDB");
 
     const server = http.createServer(app);
     const io = new Server(server, {
       cors: {
-        origin: "http://localhost:5173",
+        origin: "https://aau-connectify.vercel.app",
         methods: ["GET", "POST"],
       },
     });
@@ -52,7 +47,7 @@ mongoose
       });
     });
 
-    server.listen(PORT, () => {
+    server.listen(5011, () => {
       console.log("Server is running on port 5011.");
     });
   })
@@ -69,3 +64,6 @@ app.use("/api/comment", commentRoute);
 app.use("/api/jobsAndInternships", jobsAndInternshipsRoute);
 app.use("/api/lostAndFound", lostAndFoundRoute);
 app.use("/api/message", messageRoute);
+
+// Swagger UI setup
+app.use("/doc", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
