@@ -4,24 +4,22 @@ import React, { useState } from "react";
 import "./comment.css";
 import { Link } from "react-router-dom";
 import { format } from "timeago.js";
+import backend_url from "../../backend";
 
 const CommentSection = ({ announcementId }) => {
   const [newComment, setNewComment] = useState("");
   const [comments, setComments] = useState([]);
 
   React.useEffect(() => {
-    fetch(
-      `http://localhost:5011/api/announcement/allcomments/${announcementId}`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("userData")) &&
-            JSON.parse(localStorage.getItem("userData")).token
-          }`,
-        },
-      }
-    )
+    fetch(`${backend_url}/api/announcement/allcomments/${announcementId}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("userData")) &&
+          JSON.parse(localStorage.getItem("userData")).token
+        }`,
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
         setComments(data);
@@ -42,7 +40,7 @@ const CommentSection = ({ announcementId }) => {
       announcementId: announcementId,
       userId: JSON.parse(localStorage.getItem("userData")).userId,
     };
-    fetch("http://localhost:5011/api/comment/post", {
+    fetch(`${backend_url}/api/comment/post`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

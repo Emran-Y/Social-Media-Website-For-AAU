@@ -4,8 +4,8 @@ import LeftText from "../../textMessages/leftText/LeftText";
 import RightText from "../../textMessages/rightText/RightText";
 import { format } from "timeago.js";
 import io from "socket.io-client";
-
-const socket = io.connect("https://social-w41i.onrender.com");
+import backend_url from "../../backend.js";
+const socket = io.connect(`${backend_url}`);
 
 function ClubAdminMyClub() {
   const [myClub, setMyClub] = React.useState();
@@ -53,7 +53,7 @@ function ClubAdminMyClub() {
   }, [clickedChat]);
 
   React.useEffect(() => {
-    fetch("http://localhost:5011/api/club/myOwnClub", {
+    fetch(`${backend_url}/api/club/myOwnClub`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${
@@ -85,7 +85,7 @@ function ClubAdminMyClub() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!msg) return;
-    fetch("http://localhost:5011/api/message/sendMessage", {
+    fetch(`${backend_url}/api/message/sendMessage`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -118,7 +118,7 @@ function ClubAdminMyClub() {
   }, [socket]);
   const handleClubCardClicked = (club) => {
     setClickedChat(club);
-    fetch(`http://localhost:5011/api/message/fetchAllMessages/${club._id}`, {
+    fetch(`${backend_url}/api/message/fetchAllMessages/${club._id}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${

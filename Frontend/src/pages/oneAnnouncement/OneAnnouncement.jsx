@@ -11,6 +11,7 @@ import {
 } from "react-icons/fa";
 import CommentSection from "../Comment/Comment";
 import { useNavigate, useParams } from "react-router-dom";
+import backend_url from "../../backend";
 
 function Announcement() {
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ function Announcement() {
     useState("");
 
   React.useEffect(() => {
-    fetch("http://localhost:5011/api/user/likes", {
+    fetch(`${backend_url}/api/user/likes`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${
@@ -63,7 +64,7 @@ function Announcement() {
     }
 
     // Post announcement
-    fetch("http://localhost:5011/api/announcement/post", {
+    fetch(`${backend_url}/api/announcement/post`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -98,7 +99,7 @@ function Announcement() {
 
   useEffect(() => {
     // Fetch single announcement
-    fetch(`http://localhost:5011/api/announcement/get/${announcementId}`, {
+    fetch(`${backend_url}/api/announcement/get/${announcementId}`, {
       headers: {
         Authorization: `Bearer ${
           JSON.parse(localStorage.getItem("userData")) &&
@@ -125,7 +126,7 @@ function Announcement() {
   }, []);
 
   const handleLike = () => {
-    fetch(`http://localhost:5011/api/user/like/${announcement._id}`, {
+    fetch(`${backend_url}/api/user/like/${announcement._id}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${
@@ -155,7 +156,7 @@ function Announcement() {
 
   const handleDelete = () => {
     // Delete announcement
-    fetch(`http://localhost:5011/api/announcement/delete/${announcement._id}`, {
+    fetch(`${backend_url}/api/announcement/delete/${announcement._id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${
@@ -187,7 +188,7 @@ function Announcement() {
       picture: profilePicture !== "" ? profilePicture : undefined,
     };
 
-    fetch(`http://localhost:5011/api/announcement/update/${announcement._id}`, {
+    fetch(`${backend_url}/api/announcement/update/${announcement._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

@@ -1,8 +1,9 @@
 import React from "react";
-import "./Profile.css";
+import "./profile.css";
 import { useNavigate, Link } from "react-router-dom";
 import { format } from "timeago.js";
 import { MdEdit } from "react-icons/md";
+import backend_url from "../../backend";
 
 function Profile() {
   const [userData, setUserData] = React.useState({});
@@ -39,7 +40,7 @@ function Profile() {
 
   React.useEffect(() => {
     console.log(userData && userData.token);
-    fetch("http://localhost:5011/api/user/likes", {
+    fetch(`${backend_url}/api/user/likes`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${
@@ -65,7 +66,7 @@ function Profile() {
   }, []);
   React.useEffect(() => {
     console.log(userData && userData.token);
-    fetch("http://localhost:5011/api/user/comments", {
+    fetch(`${backend_url}/api/user/comments`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${
@@ -125,7 +126,7 @@ function Profile() {
     // console.log("Field of Study:", editedFieldOfStudy);
     // console.log("Image:", editedImage);
 
-    fetch("http://localhost:5011/api/user/editProfile", {
+    fetch(`${backend_url}/api/user/editProfile`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
