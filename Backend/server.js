@@ -8,6 +8,8 @@ const swaggerUi = require("swagger-ui-express");
 const swaggerFile = require("./swagger-output.json");
 const swaggerSpec = require("./swaggerConfig.js");
 
+dotenv.config(); // Load environment variables at the beginning
+
 const app = express();
 
 const userRoute = require("./Routes/user");
@@ -18,11 +20,7 @@ const jobsAndInternshipsRoute = require("./Routes/jobsAndInternships");
 const lostAndFoundRoute = require("./Routes/lostAndFound");
 const messageRoute = require("./Routes/message");
 
-const http = require("http");
-const { Server } = require("socket.io");
-
 app.use(cors());
-dotenv.config();
 app.use(express.json());
 
 mongoose
@@ -40,10 +38,12 @@ mongoose
 
     io.on("connection", (socket) => {
       console.log("User connected: " + socket.id);
+
       socket.on("join_room", (data) => {
         socket.join(data);
         console.log("User joined room: " + data);
       });
+
       socket.on("send_message", (data) => {
         console.log(data);
         socket.to(data.room).emit("receive_message", data.text);
@@ -54,7 +54,7 @@ mongoose
       console.log("Server is running on port 5011.");
     });
   })
-  .catch((err) => console.log(err));
+  .catch((err) => console.log("Failed to connect to MongoDB:", err));
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
@@ -70,3 +70,4 @@ app.use("/api/message", messageRoute);
 
 // Swagger UI setup
 app.use("/doc", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
