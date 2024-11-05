@@ -61,7 +61,7 @@ function UserClubs() {
   }, []);
 
   const handleApply = (clubId) => {
-    fetch(`http://localhost:5011/api/club/sendClubJoinRequest/${clubId}`, {
+    fetch(`${backend_url}/api/club/sendClubJoinRequest/${clubId}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${
