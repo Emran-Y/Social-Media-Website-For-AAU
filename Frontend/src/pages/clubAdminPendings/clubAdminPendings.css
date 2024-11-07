@@ -23,8 +23,8 @@
 }
 
 .clubadminpendings-acceptButton {
-    background-color: #1DB954;
-    color: #ffffff;
+    background-color: var(--confirm-button-color);
+    color: var(--white-color);
     border: none;
     padding: 10px;
     border-radius: 5px;

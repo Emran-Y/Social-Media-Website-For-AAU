@@ -284,7 +284,7 @@ function Profile() {
             <button
               style={
                 currentActivity === "likes"
-                  ? { backgroundColor: "#3A7BBA", color: "white" }
+                  ? { backgroundColor: "var(--primary-color)", color: "white" }
                   : {
                       backgroundColor: "#ccc",
                       color: "black",
@@ -298,7 +298,7 @@ function Profile() {
             <button
               style={
                 currentActivity === "comments"
-                  ? { backgroundColor: "#3A7BBA", color: "white" }
+                  ? { backgroundColor: "var(--primary-color)", color: "white" }
                   : {
                       backgroundColor: "#ccc",
                       color: "black",

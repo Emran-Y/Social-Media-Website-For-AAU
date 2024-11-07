@@ -18,7 +18,7 @@ ffffff
 }
 .login-header-title{
     font-size: 20px;
-    color: #3A7BBA;
+    color: var(--primary-color);
     text-shadow: 0px 0px 0px 1px black;
     word-spacing: 0.03px;
 }
@@ -37,7 +37,7 @@ ffffff
 }
 
 .login-signup-link{
-    color: #3A7BBA;
+    color: var(--primary-color);
     text-shadow: 0px 0px 0px 1px black;
     cursor: pointer;
 }
@@ -98,7 +98,7 @@ ffffff
 }
 
 .login-error-message{
-    color: red;
+    color: var(--danger-color);
     font-size: 16px;
     margin-top: 15px;
     font-weight: 500;
@@ -115,7 +115,7 @@ ffffff
 .login-btn{
     height: 35px;
     margin-top: 20px;
-    background-color: #3A7BBA;
+    background-color: var(--primary-color);
     border: none;
     color: white;
     width: 130px;
@@ -189,7 +189,4 @@ ffffff
 
     .login-header-title{
     font-size: 14px;}
-}    
-
-
-
+}

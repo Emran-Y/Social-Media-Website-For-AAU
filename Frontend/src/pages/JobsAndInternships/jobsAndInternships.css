@@ -64,7 +64,7 @@
 
 .jobsandinternships-card-link{
     text-decoration: none;
-    background-color:#3A7BBA ;
+    background-color:var(--primary-color) ;
     color: white;
     padding: 0.25rem 0.5rem;
     border-radius: 5px;
@@ -120,7 +120,7 @@
 }
 
 .jobsandinternships-form button {
-    background-color: #3A7BBA;
+    background-color: var(--primary-color);
     color: white;
     padding: 10px 20px;
     border: none;
@@ -129,7 +129,7 @@
 }
 
 .jobsandinternships-form button:hover {
-    background-color: #305c8c;
+    background-color: var(--fourth-color);
 }
 
 
@@ -140,7 +140,7 @@
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background: radial-gradient(circle, #3498db, #3A7BBA);
+    background: radial-gradient(circle, var(--tertiary-color), var(--primary-color));
     animation: pulse 1.5s ease-in-out infinite;
     margin: 0 auto;
     /* Center the spinner */
@@ -177,16 +177,14 @@
 .jobsandinternships-delete-button {
     padding: 8px;
     cursor: pointer;
-    background-color: #4caf50;
-    /* Green color for edit and update buttons */
+    background-color: var(--secondary-color);
     color: #fff;
     border: none;
     border-radius: 5px;
 }
 
 .jobsandinternships-delete-button {
-    background-color: #f44336;
-    /* Red color for delete button */
+    background-color: var(--tertiary-color);
 }
 
 .jobsandinternships-change-maker-button{

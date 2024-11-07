@@ -28,7 +28,7 @@
 
 .profile-logout-btn,.profile-1-header-edit{
     border: none;
-    background-color: red;
+    background-color: var(--danger-color);
     color: white;
     padding:0.25rem 0.5rem;
     border-radius: 5px;
@@ -36,7 +36,7 @@
 }
 
 .profile-1-header-edit{
-    background-color: blue;
+    background-color: var(--edit-button-color);
 }
 
 .profile-img{
@@ -92,7 +92,7 @@
 }
 
 /* .profile-2-1-comment{
-    background-color: #3A7BBA;
+    background-color: var(--primary-color);
     color: #fff;
 } */
 
@@ -186,7 +186,7 @@
 .profile-image-label {
     font-size: 16px;
     cursor: pointer;
-    color: #3a7bba;
+    color: var(--primary-color);
     margin-bottom: 10px;
 }
 
@@ -202,7 +202,7 @@
 
 .profile-input-label {
     font-size: 14px;
-    color: #3a7bba;
+    color: var(--primary-color);
     margin-bottom: 5px;
 }
 
@@ -235,7 +235,7 @@
 
 .profile-1-header-cancel,
 .profile-1-header-save {
-    background-color: #3a7bba;
+    background-color: var(--primary-color);
     color: white;
     border: none;
     padding: 0.5rem 1rem;

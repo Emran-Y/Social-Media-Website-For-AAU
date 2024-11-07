@@ -11,7 +11,7 @@
 
 .notfound-title {
     font-size: 3rem;
-    color: #333;
+    color: var(--text-color);
     margin-bottom: 20px;
 }
 
@@ -23,7 +23,7 @@
 
 .notfound-back-btn {
     padding: 10px 20px;
-    background-color: #1db954;
+    background-color: var(--confirm-button-color);
     color: white;
     border: none;
     border-radius: 5px;
