@@ -17,11 +17,6 @@ const commentRoute = require("./Routes/comment");
 const jobsAndInternshipsRoute = require("./Routes/jobsAndInternships");
 const lostAndFoundRoute = require("./Routes/lostAndFound");
 const messageRoute = require("./Routes/message");
-<<<<<<< HEAD
-=======
-const http = require("http");
-const { Server } = require("socket.io");
->>>>>>> 0bf0cbba9124af36edb325ab600401eb73418326
 
 app.use(cors());
 dotenv.config();

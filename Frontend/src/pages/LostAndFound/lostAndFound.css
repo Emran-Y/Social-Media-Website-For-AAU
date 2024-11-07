@@ -28,6 +28,11 @@
     max-width: 45vw;
     /* Flex basis to control initial width */
     flex-basis: calc(50% - 20px);
+    background-color: var(--background-color);
+    /* Light gray background */
+    border: 2px solid var(--primary-color);
+    /* Blue border */
+    margin-bottom: 10px;
 }
 
 .lostandfound-card-header {
@@ -39,6 +44,8 @@
 
 .lostandfound-card-title {
     font-size: 1.2rem;
+    color: var(--text-color);
+    /* Dark text color */
 }
 
 .lostandfound-card-date {
@@ -48,15 +55,19 @@
 .lostandfound-card-image {
     width: 160px;
     height: 160px;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    border: 2px solid #ccc;
     border-radius: 50%;
+    margin-bottom: 10px;
+    border: 2px solid var(--tertiary-color);
+    /* Blue border */
+    background-color: var(--background-color);
+    /* Light gray background */
 }
 
 .lostandfound-card-description {
     font-size: 20px;
     text-align: center;
+    color: var(--text-color);
+    /* Dark text color */
 }
 
 @media (max-width: 600px) {
@@ -103,7 +114,7 @@
 }
 
 .lostandfound-form button {
-    background-color: #3a7bba;
+    background-color: var(--primary-color);
     color: white;
     padding: 10px 20px;
     border: none;
@@ -112,7 +123,7 @@
 }
 
 .lostandfound-form button:hover {
-    background-color: #305c8c;
+    background-color: var(--fourth-color);
 }
 
 /* NiceSpinner.css */
@@ -121,7 +132,7 @@
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background: radial-gradient(circle, #3498db, #3A7BBA);
+    background: radial-gradient(circle, var(--tertiary-color), var(--primary-color));
     animation: pulse 1.5s ease-in-out infinite;
     margin: 0 auto;
     /* Center the spinner */
@@ -176,10 +187,11 @@
     max-width: 45vw;
     /* Flex basis to control initial width */
     flex-basis: calc(50% - 20px);
-    background-color: #f8f8f8;
+    background-color: var(--background-color);
     /* Light gray background */
-    border: 2px solid #3498db;
+    border: 2px solid var(--primary-color);
     /* Blue border */
+    margin-bottom: 10px;
 }
 
 .lostandfound-card-header {
@@ -191,7 +203,7 @@
 
 .lostandfound-card-title {
     font-size: 1.2rem;
-    color: #333;
+    color: var(--text-color);
     /* Dark text color */
 }
 
@@ -204,16 +216,16 @@
     height: 160px;
     border-radius: 50%;
     margin-bottom: 10px;
-    border: 2px solid #3498db;
+    border: 2px solid var(--tertiary-color);
     /* Blue border */
-    background-color: #f8f8f8;
+    background-color: var(--background-color);
     /* Light gray background */
 }
 
 .lostandfound-card-description {
     font-size: 20px;
     text-align: center;
-    color: #333;
+    color: var(--text-color);
     /* Dark text color */
 }
 
@@ -230,7 +242,7 @@
 .lostandfound-delete-button{
     padding: 8px;
     cursor: pointer;
-    background-color: #4caf50;
+    background-color: var(--secondary-color);
     /* Green color for edit and update buttons */
     color: #fff;
     border: none;
@@ -239,7 +251,7 @@
 }
 
 .lostandfound-delete-button {
-    background-color: #f44336;
+    background-color: var(--tertiary-color);
     /* Red color for delete button */
 }
 
