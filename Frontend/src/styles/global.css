@@ -1,0 +1,16 @@
+:root {
+  --primary-color: #3A7BBA; /* Blue */
+  --secondary-color: #6DA1D3; /* Light Blue */
+  --tertiary-color: #3498db; /* Another Blue */
+  --fourth-color: #305c8c; /* Dark Blue */
+  --fifth-color: #f1f1f1; /* Light gray */
+  --hover-color: #2E5C9B; /* Dark gray Blue */
+  --background-color: #f8f8f8; /* Light gray */
+  --text-color: #333; /* Dark text color */
+  --white-color: #fff; /* White */
+  --danger-color: red; /* Red */
+  --footer-container-color: #466a8f; /* Gray Blue */
+  --edit-button-color: blue; /* Blue */
+  --confirm-button-color: #1DB954; /* Green */
+}
+

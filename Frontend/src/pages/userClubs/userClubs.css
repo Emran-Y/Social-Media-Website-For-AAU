@@ -20,8 +20,8 @@
 }
 
 .availableClubs-applyButton {
-    background-color: #3498db;
-    color: #ffffff;
+    background-color: var(--tertiary-color);
+    color: var(--white-color);
     border: none;
     padding: 10px;
     border-radius: 5px;

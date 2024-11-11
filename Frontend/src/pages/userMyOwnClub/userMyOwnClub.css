@@ -20,7 +20,7 @@
     overflow-y: scroll;
     position: relative;
     padding-bottom: 20px;
-    border: 1px solid #3A7BBA;
+    border: 1px solid var(--primary-color);
 }
 
 .usermyown-chatting-container-left {
@@ -115,7 +115,7 @@
     border-radius: 10px;
     min-height: 85vh;
     max-height: 85vh;
-    border: 1px solid #3A7BBA;
+    border: 1px solid var(--primary-color);
 }
 
 .component-wrapper{
@@ -184,7 +184,7 @@
 .send-btn {
     min-height: 100%;
     border: none;
-    background-color: #1DB954;
+    background-color: var(--confirm-button-color);
     width: 10%;
     color: white;
 

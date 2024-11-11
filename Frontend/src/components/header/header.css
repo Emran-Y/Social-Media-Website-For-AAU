@@ -5,7 +5,7 @@
 }
 
 .header-container{
-    background-color: #3A7BBA;
+    background-color: var(--primary-color);
     width: 100vw;
     padding-top: 5px;
     z-index: 999;
@@ -32,7 +32,7 @@
     width: 30px;
 }
 .header-slogan{
-    color: white;
+    color: #fff;
     font-size: 9px;
     width: 80%;
     text-align: center;
@@ -51,7 +51,7 @@
 .header-profile{
     width: 40px;
     height: 40px;
-    background-color: yellow;
+    background-color: var(--secondary-color);
     border-radius: 50%;
     cursor: pointer;
     background-size:cover ;
@@ -73,7 +73,7 @@
 .header-navigation {
     position: absolute;
     min-width: 100vw;
-    background-color: #3A7BBA;
+    background-color: var(--primary-color);
     height: 0;
     inset: 0;
     top: 99.6px;
@@ -105,10 +105,10 @@
 
 .nav-menus li a{
     text-decoration: none;
-    color: white;
+    color: var(--tertiary-color);
 }
 .nav-menus li a:hover{
-    color: #fff;
+    color: var(--tertiary-color);
     text-decoration: underline;
 }
 
