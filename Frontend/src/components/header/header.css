@@ -105,10 +105,10 @@
 
 .nav-menus li a{
     text-decoration: none;
-    color: var(--tertiary-color);
+    color: var(--white-color);
 }
 .nav-menus li a:hover{
-    color: var(--tertiary-color);
+    color: var(--white-color);
     text-decoration: underline;
 }
 
