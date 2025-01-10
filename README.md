@@ -1,5 +1,4 @@
 # AAU Social Media Platform
-
 ## Table of Contents
 
 - [Introduction](#introduction)
